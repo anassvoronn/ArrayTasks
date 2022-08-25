@@ -14,7 +14,7 @@ public class Task4 {
         int[] array = new int[8];
 
         populateArrayWithRandomNumbers(array);
-
+        //Hello
         System.out.println();
 
         getZeroWithOddIndex(array);
