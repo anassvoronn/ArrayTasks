@@ -14,10 +14,14 @@ public class Task4 {
         int[] array = new int[8];
 
         populateArrayWithRandomNumbers(array);
-        //Hello
+
+        printArray(array);
+
         System.out.println();
 
         getZeroWithOddIndex(array);
+
+        printArray2(array);
     }
 
     private void populateArrayWithRandomNumbers(final int[] array) {
@@ -27,12 +31,23 @@ public class Task4 {
         }
     }
 
+    private void printArray(final int[] array) {
+        for (int item : array) {
+            System.out.print(item + " ");
+        }
+    }
+
     private void getZeroWithOddIndex(final int[] array) {
         for (int i = 0; i < array.length; i++) {
             if (i % 2 != 0) {
                 array[i] = 0;
             }
-            System.out.print(array[i] + " ");
+        }
+    }
+
+    private void printArray2(final int[] array) {
+        for (int item : array) {
+            System.out.print(item + " ");
         }
     }
 

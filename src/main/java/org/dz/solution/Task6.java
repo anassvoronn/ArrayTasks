@@ -15,28 +15,27 @@ public class Task6 {
 
         fillArrayWithRandomNumbers(array);
 
-        printStrictlyIncreasingArray(array);
+        printArray(array);
+
+        check(array);
     }
     private void fillArrayWithRandomNumbers(final int[] array) {
         Random generation = new Random();
         for (int i = 0; i < array.length; i++) {
-            array[i] = generation.nextInt(90) + 10;
-            System.out.println(array[i] + " ");
+            array[i] = generation.nextInt(100) + 10;
         }
     }
-    private void printStrictlyIncreasingArray(final int[] array){
-        for (int i = 0; i < array.length; i++) {
-            if (i > 0){
-                if (array[i - 1] >= array[i]){
-                    System.out.println("Не возрастающая");
-                    break;
-                }
-            }
-            if (i == array.length - 1){
-                System.out.println("Строго возрастающая");
-
-            }
-
+    private void printArray(final int[] array){
+        for ( int item : array){
+            System.out.println(item + " ");
         }
+    }
+    private boolean check(final int[] array){
+        for (int i = 1; i < array.length; i++) {
+                if (array[i - 1] >= array[i]){
+                    return true;
+                }
+        }
+        return false;
     }
 }

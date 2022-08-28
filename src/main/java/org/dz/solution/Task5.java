@@ -37,7 +37,6 @@ public class Task5 {
     private void printArray(final int[] array) {
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + " ");
-
         }
     }
 
