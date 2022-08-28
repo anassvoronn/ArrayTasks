@@ -23,8 +23,6 @@ public class Task5 {
         printArray(array2);
 
         getAverage(array1);
-
-
     }
 
     private void fillArrayWithRandomNumbers(final int[] array) {

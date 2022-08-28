@@ -10,7 +10,7 @@ import java.util.Random;
 является ли массив строговозрастающей последовательностью.
  */
 public class Task6 {
-    public void printResult(){
+    public void printResult() {
         int[] array = new int[4];
 
         fillArrayWithRandomNumbers(array);
@@ -19,22 +19,25 @@ public class Task6 {
 
         check(array);
     }
+
     private void fillArrayWithRandomNumbers(final int[] array) {
         Random generation = new Random();
         for (int i = 0; i < array.length; i++) {
             array[i] = generation.nextInt(100) + 10;
         }
     }
-    private void printArray(final int[] array){
-        for ( int item : array){
+
+    private void printArray(final int[] array) {
+        for (int item : array) {
             System.out.println(item + " ");
         }
     }
-    private boolean check(final int[] array){
+
+    private boolean check(final int[] array) {
         for (int i = 1; i < array.length; i++) {
-                if (array[i - 1] >= array[i]){
-                    return true;
-                }
+            if (array[i - 1] >= array[i]) {
+                return true;
+            }
         }
         return false;
     }
