@@ -11,12 +11,12 @@ public class Task7 {
     public void printResult() {
         int[] array = new int[20];
 
-        getFibonacciArray(array);
+        populateArrayWithFibonacciNumbers(array);
 
         printArray(array);
     }
 
-    private void getFibonacciArray(final int[] array) {
+    private void populateArrayWithFibonacciNumbers(final int[] array) {
         for (int i = 0; i < array.length; i++) {
             if (i < 2) {
                 array[i] = 1;
