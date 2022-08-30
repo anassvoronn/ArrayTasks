@@ -17,13 +17,13 @@ public class Task6 {
 
         printArray(array);
 
-        check(array);
+        isStrictlyIncreasing(array);
     }
 
     private void fillArrayWithRandomNumbers(final int[] array) {
-        Random generation = new Random();
+        Random generator = new Random();
         for (int i = 0; i < array.length; i++) {
-            array[i] = generation.nextInt(100) + 10;
+            array[i] = generator.nextInt(100) + 10;
         }
     }
 
@@ -33,7 +33,7 @@ public class Task6 {
         }
     }
 
-    private boolean check(final int[] array) {
+     boolean isStrictlyIncreasing(final int[] array) {
         for (int i = 1; i < array.length; i++) {
             if (array[i - 1] >= array[i]) {
                 return true;
