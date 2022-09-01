@@ -20,9 +20,25 @@ public class Task5 {
         fillArrayWithRandomNumbers(array2);
 
         printArray(array1);
+        System.out.println();
         printArray(array2);
+        System.out.println();
 
-        getAverage(array1);
+        double averageArray1 = getAverage(array1);
+        System.out.println("Array1 " + averageArray1);
+        double averageArray2 = getAverage(array2);
+        System.out.println("Array2 " + averageArray2);
+
+        if (averageArray1 > averageArray2) {
+            System.out.println("Array1 > Array2");
+            return;
+        }
+        if (averageArray1 < averageArray2) {
+            System.out.println("Array2 < Array1");
+            return;
+        }
+        System.out.println("Array1 == Array2");
+
     }
 
     private void fillArrayWithRandomNumbers(final int[] array) {
@@ -33,18 +49,16 @@ public class Task5 {
     }
 
     private void printArray(final int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i] + " ");
+        for (int j : array) {
+            System.out.print(j + " ");
         }
     }
 
     private double getAverage(final int[] array) {
-        int result = 0;
+        double result = 0;
         for (int number : array) {
             result = result + number;
-
         }
-        result = result / 5;
-        return result;
+        return result / 5;
     }
 }
