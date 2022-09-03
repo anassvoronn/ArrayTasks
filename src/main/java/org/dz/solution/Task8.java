@@ -34,7 +34,7 @@ public class Task8 {
     }
 
     private void determineTheMaxElementInAnArray(final int[] array) {
-        int maxNumber = 0;
+        int maxNumber = Integer.MIN_VALUE;
         int index = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] >= maxNumber) {
