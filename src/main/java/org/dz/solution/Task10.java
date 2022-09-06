@@ -35,24 +35,24 @@ public class Task10 {
     }
 
     private void determineAndPrintAFrequentlyOccurringElementInAnArray(final int[] array) {
-        int minusOne = 0;
-        int one = 0;
-        int zero = 0;
+        int minusOneQuantity = 0;
+        int oneQuantity = 0;
+        int zeroQuantity = 0;
         for (int j : array) {
             if (j == -1) {
-                minusOne++;
+                minusOneQuantity++;
             } else if (j == 1) {
-                one++;
+                oneQuantity++;
             } else {
-                zero++;
+                zeroQuantity++;
             }
         }
-        if (minusOne > one && minusOne > zero) {
-            System.out.println("-1 встречается чаще " + minusOne);
-        } else if (one > minusOne && one > zero) {
-            System.out.println("1 встречается чаще " + one);
-        } else if (zero > minusOne && zero > one) {
-            System.out.println("0 встречается чаще " + zero);
+        if (minusOneQuantity > oneQuantity && minusOneQuantity > zeroQuantity) {
+            System.out.println("-1(" + minusOneQuantity + ") встречается чаще ");
+        } else if (oneQuantity > minusOneQuantity && oneQuantity > zeroQuantity) {
+            System.out.println("1(" + oneQuantity + ") встречается чаще ");
+        } else if (zeroQuantity > minusOneQuantity && zeroQuantity > oneQuantity) {
+            System.out.println("0(" + zeroQuantity + ") встречается чаще ");
         }
     }
 }
