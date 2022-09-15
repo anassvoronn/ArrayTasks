@@ -1,6 +1,7 @@
 package org.dz.solution;
 
-import java.util.Random;
+import org.dz.solution.helper.ArrayHelper;
+
 import java.util.Scanner;
 
 /*
@@ -47,18 +48,14 @@ public class Task13 {
                 continue;
             }
 
-            int evenElement = 0;
             int[] array1 = new int[number];
-            Random generator = new Random();
-            for (int i = 0; i < array1.length; i++) {
-                array1[i] = generator.nextInt(number) + 1;
-                System.out.print(array1[i] + " ");
-                if (array1[i] % 2 == 0) {
-                    evenElement++;
-                }
-            }
-
+            ArrayHelper helper = new ArrayHelper();
+            helper.fillArrayWithRandomNumbers(array1, generator -> generator.nextInt(number) + 1);
+            helper.printArray(array1);
             System.out.println();
+
+            int evenElement = 0;
+            getNumberOfEvenNumbers(array1);
 
             if (evenElement != 0) {
                 int[] array2 = new int[evenElement];
@@ -73,5 +70,15 @@ public class Task13 {
                 System.out.println();
             }
         }
+    }
+
+    private int getNumberOfEvenNumbers(final int[] array){
+        int counter = 0;
+        for (int j : array) {
+            if (j % 2 == 0) {
+                counter++;
+            }
+        }
+        return counter;
     }
 }
