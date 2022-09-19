@@ -54,25 +54,23 @@ public class Task13 {
             helper.printArray(array1);
             System.out.println();
 
-            int evenElement = 0;
+            int evenNumber = 0;
             getNumberOfEvenNumbers(array1);
 
-            if (evenElement != 0) {
-                int[] array2 = new int[evenElement];
-                evenElement = 0;
-                for (int j : array1) {
-                    if (j % 2 == 0) {
-                        array2[evenElement] = j;
-                        System.out.print(array2[evenElement] + " ");
-                        evenElement++;
-                    }
+            int index = 0;
+            int[] array2 = new int[evenNumber];
+            for (int j : array1) {
+                if (j % 2 == 0) {
+                    array2[index] = j;
+                    System.out.print(array2[index] + " ");
+                    index++;
                 }
-                System.out.println();
             }
+
         }
     }
 
-    private int getNumberOfEvenNumbers(final int[] array){
+    private int getNumberOfEvenNumbers(final int[] array) {
         int counter = 0;
         for (int j : array) {
             if (j % 2 == 0) {
