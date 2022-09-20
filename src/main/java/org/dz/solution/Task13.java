@@ -50,23 +50,15 @@ public class Task13 {
 
             int[] array1 = new int[number];
             ArrayHelper helper = new ArrayHelper();
-            helper.fillArrayWithRandomNumbers(array1, generator -> generator.nextInt(number) + 1);
+            helper.fillArrayWithRandomNumbers(array1, generator -> generator.nextInt(number + 1));
             helper.printArray(array1);
             System.out.println();
 
-            int evenNumber = 0;
-            getNumberOfEvenNumbers(array1);
+            final int evenNumbersQuantity = getNumberOfEvenNumbers(array1);
 
-            int index = 0;
-            int[] array2 = new int[evenNumber];
-            for (int j : array1) {
-                if (j % 2 == 0) {
-                    array2[index] = j;
-                    System.out.print(array2[index] + " ");
-                    index++;
-                }
-            }
+            helper.printArray(createAndFillSecondArray(array1, evenNumbersQuantity));
 
+            System.out.println();
         }
     }
 
@@ -78,5 +70,17 @@ public class Task13 {
             }
         }
         return counter;
+    }
+
+    private int[] createAndFillSecondArray(final int[] array1, final int evenNumbersQuantity) {
+        int index = 0;
+        int[] array2 = new int[evenNumbersQuantity];
+        for (int j : array1) {
+            if (j % 2 == 0) {
+                array2[index] = j;
+                index++;
+            }
+        }
+        return array2;
     }
 }
