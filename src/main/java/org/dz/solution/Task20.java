@@ -34,16 +34,19 @@ public class Task20 {
         int[] array3 = new int[numberOfZeros];
 
         fillArrayWithPositiveNumbers(array, array2);
+        System.out.println("Массив с положительными числами:");
         printArray(array2);
 
         System.out.println();
 
         fillArrayWithNegativeNumbers(array, array1);
+        System.out.println("Массив с отрицательными числами:");
         printArray(array1);
 
         System.out.println();
 
         fillArrayWithZeros(array, array3);
+        System.out.println("Массив с нулями:");
         printArray(array3);
 
         System.out.println();
