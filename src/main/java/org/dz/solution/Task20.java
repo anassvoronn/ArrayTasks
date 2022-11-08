@@ -24,16 +24,11 @@ public class Task20 {
         printArray(array);
 
         System.out.println();
-        // Найти количество > 0
-        // Найти количество < 0
-        // Найти количество = 0
-        // > 0 записать в массив
-        // < 0 записать в массив
-        // = 0 записать в массив
-        // собрать матрицу
+
         int numberOfNegativeNumbers = getNumberOfNegativeNumbers(array);
         int numberOfPositiveNumbers = getNumberOfPositiveNumbers(array);
         int numberOfZeros = getNumberOfZeros(array);
+
         int[] array1 = new int[numberOfNegativeNumbers];
         int[] array2 = new int[numberOfPositiveNumbers];
         int[] array3 = new int[numberOfZeros];
@@ -100,31 +95,31 @@ public class Task20 {
         return counter;
     }
 
-    private void fillArrayWithPositiveNumbers(final int[] array, final int[] array1){
+    private void fillArrayWithPositiveNumbers(final int[] array, final int[] result) {
         int counter = 0;
         for (int j : array) {
             if (j > 0) {
-                array1[counter] = j;
+                result[counter] = j;
                 counter++;
             }
         }
     }
 
-    private void fillArrayWithNegativeNumbers(final int[] array, final int[] array1){
+    private void fillArrayWithNegativeNumbers(final int[] array, final int[] result) {
         int counter = 0;
-        for (int j : array){
-            if (j < 0){
-                array1[counter] = j;
+        for (int j : array) {
+            if (j < 0) {
+                result[counter] = j;
                 counter++;
             }
         }
     }
 
-    private void fillArrayWithZeros(final int[] array, final int[] array1){
+    private void fillArrayWithZeros(final int[] array, final int[] result) {
         int counter = 0;
         for (int j : array) {
             if (j == 0) {
-                array1[counter] = j;
+                result[counter] = j;
                 counter++;
             }
         }
