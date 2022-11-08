@@ -1,5 +1,6 @@
 package org.dz.solution;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /*
@@ -30,10 +31,30 @@ public class Task20 {
         // < 0 записать в массив
         // = 0 записать в массив
         // собрать матрицу
-        int[] array1 = new int[getNumberOfNegativeNumbers(array)];
-        int[] array2 = new int[getNumberOfPositiveNumbers(array)];
-        int[] array3 = new int[getNumberOfZeros(array)];
-        System.out.println(getMatrix(array1, array2, array3));
+        int numberOfNegativeNumbers = getNumberOfNegativeNumbers(array);
+        int numberOfPositiveNumbers = getNumberOfPositiveNumbers(array);
+        int numberOfZeros = getNumberOfZeros(array);
+        int[] array1 = new int[numberOfNegativeNumbers];
+        int[] array2 = new int[numberOfPositiveNumbers];
+        int[] array3 = new int[numberOfZeros];
+
+        fillArrayWithPositiveNumbers(array, array2);
+        printArray(array2);
+
+        System.out.println();
+
+        fillArrayWithNegativeNumbers(array, array1);
+        printArray(array1);
+
+        System.out.println();
+
+        fillArrayWithZeros(array, array3);
+        printArray(array3);
+
+        System.out.println();
+
+        int[][] matrix = new int[][]{array1, array2, array3};
+        System.out.println(Arrays.deepToString(matrix));
     }
 
     private void fillArraysWithRandomNumbers(final int[] array) {
@@ -79,25 +100,33 @@ public class Task20 {
         return counter;
     }
 
-    private int[] getPositiveNumbersArray(final int[] array) {
-        int counter = getNumberOfPositiveNumbers(array);
-        return new int[counter];
+    private void fillArrayWithPositiveNumbers(final int[] array, final int[] array1){
+        int counter = 0;
+        for (int j : array) {
+            if (j > 0) {
+                array1[counter] = j;
+                counter++;
+            }
+        }
     }
 
-    private int[] getNegativeNumbersArray(final int[] array) {
-        int counter = getNumberOfNegativeNumbers(array);
-        return new int[counter];
+    private void fillArrayWithNegativeNumbers(final int[] array, final int[] array1){
+        int counter = 0;
+        for (int j : array){
+            if (j < 0){
+                array1[counter] = j;
+                counter++;
+            }
+        }
     }
 
-    private int[] getZerosNumbersArray(final int[] array) {
-        int counter = getNumberOfZeros(array);
-        return new int[counter];
-    }
-
-    private int[][] getMatrix(final int[] array1, final int[] array2, final int[] array3) {
-        int[] negativeNumbersArray = getNegativeNumbersArray(array1);
-        int[] positiveNumbersArray = getPositiveNumbersArray(array2);
-        int[] zerosNumbersArray = getZerosNumbersArray(array3);
-        return new int[][]{negativeNumbersArray, positiveNumbersArray, zerosNumbersArray};
+    private void fillArrayWithZeros(final int[] array, final int[] array1){
+        int counter = 0;
+        for (int j : array) {
+            if (j == 0) {
+                array1[counter] = j;
+                counter++;
+            }
+        }
     }
 }
