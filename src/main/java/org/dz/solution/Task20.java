@@ -1,6 +1,5 @@
 package org.dz.solution;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.function.Predicate;
 
@@ -51,9 +50,15 @@ public class Task20 {
         printArray(array3);
 
         System.out.println();
+        System.out.println();
 
-        int[][] matrix = new int[][]{array1, array2, array3};
-        System.out.println(Arrays.deepToString(matrix));
+        int[][] matrix = {array1, array2, array3};
+        for (int[] ints : matrix) {
+            for (int anInt : ints) {
+                System.out.print(" " + anInt);
+            }
+            System.out.println();
+        }
     }
 
     private void fillArraysWithRandomNumbers(final int[] array) {
