@@ -2,6 +2,7 @@ package org.dz.solution;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.function.Predicate;
 
 /*
 Дан одномерный массив целых чисел.
@@ -25,27 +26,27 @@ public class Task20 {
 
         System.out.println();
 
-        int numberOfNegativeNumbers = getNumberOfNegativeNumbers(array);
-        int numberOfPositiveNumbers = getNumberOfPositiveNumbers(array);
-        int numberOfZeros = getNumberOfZeros(array);
+        int numberOfNegativeNumbers = getNumberOf(array, number -> number < 0);
+        int numberOfPositiveNumbers = getNumberOf(array, number -> number > 0);
+        int numberOfZeros = getNumberOf(array, number -> number == 0);
 
         int[] array1 = new int[numberOfNegativeNumbers];
         int[] array2 = new int[numberOfPositiveNumbers];
         int[] array3 = new int[numberOfZeros];
 
-        fillArrayWithPositiveNumbers(array, array2);
+        fillArrayWith(array, array2, number -> number > 0);
         System.out.println("Массив с положительными числами:");
         printArray(array2);
 
         System.out.println();
 
-        fillArrayWithNegativeNumbers(array, array1);
+        fillArrayWith(array, array1, number -> number < 0);
         System.out.println("Массив с отрицательными числами:");
         printArray(array1);
 
         System.out.println();
 
-        fillArrayWithZeros(array, array3);
+        fillArrayWith(array, array3, number -> number == 0);
         System.out.println("Массив с нулями:");
         printArray(array3);
 
@@ -68,60 +69,20 @@ public class Task20 {
         }
     }
 
-    private int getNumberOfNegativeNumbers(final int[] array) {
+    private int getNumberOf(final int[] array, Predicate<Integer> predicate) {
         int counter = 0;
         for (int j : array) {
-            if (j < 0) {
+            if (predicate.test(j)) {
                 counter++;
             }
         }
         return counter;
     }
 
-    private int getNumberOfPositiveNumbers(final int[] array) {
+    private void fillArrayWith(final int[] array, final int[] result, Predicate<Integer> predicate) {
         int counter = 0;
         for (int j : array) {
-            if (j > 0) {
-                counter++;
-            }
-        }
-        return counter;
-    }
-
-    private int getNumberOfZeros(final int[] array) {
-        int counter = 0;
-        for (int j : array) {
-            if (j == 0) {
-                counter++;
-            }
-        }
-        return counter;
-    }
-
-    private void fillArrayWithPositiveNumbers(final int[] array, final int[] result) {
-        int counter = 0;
-        for (int j : array) {
-            if (j > 0) {
-                result[counter] = j;
-                counter++;
-            }
-        }
-    }
-
-    private void fillArrayWithNegativeNumbers(final int[] array, final int[] result) {
-        int counter = 0;
-        for (int j : array) {
-            if (j < 0) {
-                result[counter] = j;
-                counter++;
-            }
-        }
-    }
-
-    private void fillArrayWithZeros(final int[] array, final int[] result) {
-        int counter = 0;
-        for (int j : array) {
-            if (j == 0) {
+            if (predicate.test(j)) {
                 result[counter] = j;
                 counter++;
             }
