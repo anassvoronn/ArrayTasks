@@ -16,11 +16,7 @@ public class Task22 {
 
         System.out.println();
 
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                transportMatrix[j][i] = matrix[i][j];
-            }
-        }
+        getTransportedMatrix(matrix,transportMatrix);
         printArray(transportMatrix);
     }
 
@@ -39,6 +35,14 @@ public class Task22 {
                 System.out.print(anInt + " ");
             }
             System.out.println();
+        }
+    }
+
+    private void getTransportedMatrix(final int[][] matrix, final int[][] transportMatrix){
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                transportMatrix[j][i] = matrix[i][j];
+            }
         }
     }
 }
