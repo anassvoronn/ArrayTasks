@@ -24,4 +24,14 @@ public class Car {
     public int getPrice() {
         return this.price;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "b='" + brand + '\'' +
+                ", c='" + color + '\'' +
+                ", s=" + serialNumber +
+                ", p=" + price +
+                '}';
+    }
 }
