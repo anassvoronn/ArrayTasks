@@ -53,16 +53,20 @@ public class Task23 {
         return elementToSearch;
     }
 
-    public int useBinarySearch1(final int[] array, final int firstIndex, final int lastIndex, final int elementToSearch) {
+    public int useBinarySearchRecursively(final int[] array, final int elementToSearch) {
+        return useBinarySearchRecursively(array, 0, array.length - 1, elementToSearch);
+    }
+
+    private int useBinarySearchRecursively(final int[] array, final int firstIndex, final int lastIndex, final int elementToSearch) {
         if (lastIndex >= firstIndex) {
             int middle = firstIndex + (lastIndex - firstIndex) / 2;
             if (array[middle] == elementToSearch) {
                 return middle;
             }
             if (array[middle] > elementToSearch) {
-                return useBinarySearch1(array, firstIndex, middle - 1, elementToSearch);
+                return useBinarySearchRecursively(array, firstIndex, middle - 1, elementToSearch);
             } else if (array[middle] < elementToSearch) {
-                return useBinarySearch1(array, middle + 1, lastIndex, elementToSearch);
+                return useBinarySearchRecursively(array, middle + 1, lastIndex, elementToSearch);
             }
         }
         return -1;
