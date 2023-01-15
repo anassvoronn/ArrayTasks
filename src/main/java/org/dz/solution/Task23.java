@@ -11,17 +11,16 @@ import java.util.Random;
 обоих решений для больших массивов (например, 100000000 элементов).
  */
 public class Task23 {
-    public void printResult() {
+    public void printResult(final int elementToSearch) {
         int[] array = new int[10];
-        int elementToSearch = 13;
 
         fillArraysWithRandomNumbers(array);
         Arrays.sort(array);
         printArray(array);
 
         System.out.println();
-        int i = useBinarySearch(array, elementToSearch);
-        System.out.print(i);
+        int useBinarySearch = useBinarySearch(array, elementToSearch);
+        System.out.print(useBinarySearch);
     }
 
     private void fillArraysWithRandomNumbers(final int[] array) {
@@ -37,7 +36,7 @@ public class Task23 {
         }
     }
 
-    private int useBinarySearch(final int[] array, final int elementToSearch) {
+    public int useBinarySearch(final int[] array, final int elementToSearch) {
         int firstIndex = 0;
         int lastIndex = array.length - 1;
 
@@ -54,7 +53,7 @@ public class Task23 {
         return elementToSearch;
     }
 
-    private int useBinarySearch1(final int[] array, final int firstIndex, final int lastIndex, final int elementToSearch) {
+    public int useBinarySearch1(final int[] array, final int firstIndex, final int lastIndex, final int elementToSearch) {
         if (lastIndex >= firstIndex) {
             int middle = firstIndex + (lastIndex - firstIndex) / 2;
             if (array[middle] == elementToSearch) {
@@ -62,7 +61,7 @@ public class Task23 {
             }
             if (array[middle] > elementToSearch) {
                 return useBinarySearch1(array, firstIndex, middle - 1, elementToSearch);
-            }else if (array[middle] < elementToSearch){
+            } else if (array[middle] < elementToSearch) {
                 return useBinarySearch1(array, middle + 1, lastIndex, elementToSearch);
             }
         }
