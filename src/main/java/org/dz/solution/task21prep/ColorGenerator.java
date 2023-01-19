@@ -1,8 +1,12 @@
 package org.dz.solution.task21prep;
 
+import java.util.Random;
+
 public class ColorGenerator {
     public String getColor() {
-        // to generate random colors you need an array and Random class
-        return "Black";
+        String[] colors = new String[]{"Black", "Pink", "Yellow", "Blue", "White", "Red", "Green", "Purple", "Gray"};
+        Random generator = new Random();
+        int randomNumbers = generator.nextInt(colors.length);
+        return colors[randomNumbers];
     }
 }

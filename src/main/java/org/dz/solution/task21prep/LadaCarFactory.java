@@ -1,15 +1,12 @@
 package org.dz.solution.task21prep;
 
-public class MercedesCarFactory extends Factory {
-
-    public static final String BRAND = "Mercedes";
+public class LadaCarFactory extends Factory {
+    public static final String BRAND = "Lada";
     public static final int DEFAULT_PRICE = 10_000;
     public static final int EXTRA_PRICE_FOR_COLOR = 1000;
 
-    public MercedesCarFactory(final ColorGenerator colorGenerator) {
+    public LadaCarFactory(ColorGenerator colorGenerator) {
         super(colorGenerator);
-        System.out.println("Mercedes constructor start");
-        System.out.println("Mercedes constructor finish");
     }
 
     @Override
