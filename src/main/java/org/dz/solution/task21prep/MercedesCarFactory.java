@@ -1,22 +1,29 @@
 package org.dz.solution.task21prep;
 
-public class MercedesCarFactory {
+public class MercedesCarFactory extends Factory {
 
     public static final String BRAND = "Mercedes";
     public static final int DEFAULT_PRICE = 10_000;
     public static final int EXTRA_PRICE_FOR_COLOR = 1000;
-    private final ColorGenerator colorGenerator;
 
     public MercedesCarFactory(final ColorGenerator colorGenerator) {
-        this.colorGenerator = colorGenerator;
+        super(colorGenerator);
+        System.out.println("Mercedes constructor start");
+        System.out.println("Mercedes constructor finish");
     }
 
-    public Car getCar() {
-        String color = colorGenerator.getColor();
-        return new Car(BRAND, color, DEFAULT_PRICE);
+    @Override
+    protected String getBrand() {
+        return BRAND;
     }
 
-    public Car getCar(String color) {
-        return new Car(BRAND, color, DEFAULT_PRICE + EXTRA_PRICE_FOR_COLOR);
+    @Override
+    protected int getPrice() {
+        return DEFAULT_PRICE;
+    }
+
+    @Override
+    protected int getExtraPrice() {
+        return EXTRA_PRICE_FOR_COLOR;
     }
 }
