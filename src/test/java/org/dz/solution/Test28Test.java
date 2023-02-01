@@ -14,7 +14,7 @@ public class Test28Test {
         MyMatrix matrix4 = new MyMatrix(5, 7, false);
         MyMatrix matrix5 = new MyMatrix(5, 7, true);
 
-        matrix5.addNumber(6);
+        matrix5.multiplyBy(6);
 
         matrix3.printMatrix();
         matrix3.transpose();

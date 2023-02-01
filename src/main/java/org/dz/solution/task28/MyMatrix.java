@@ -1,5 +1,6 @@
 package org.dz.solution.task28;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class MyMatrix {
@@ -17,6 +18,11 @@ public class MyMatrix {
         }
     }
 
+    public MyMatrix(int[][] sourceArray){
+        array = sourceArray;
+        //TODO Нарушение Инкапсуляции
+    }
+
     private void generateRandomMatrix() {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
@@ -25,7 +31,7 @@ public class MyMatrix {
         }
     }
 
-    public void addNumber(int number) {
+    public void multiplyBy(int number) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 array[i][j] *= number;
@@ -44,16 +50,17 @@ public class MyMatrix {
 
     @Override
     public String toString() {
-        return "1 4 2\n3 7 9";
+        return "MyMatrix{" +
+                "array= " + array[0][0] + "\n" + array[1][1] + "\n" +array[2][2] + "\n" +
+                '}';
     }
 
+    //TODO Написать тест для метода
     public void addMatrix(MyMatrix otherMatrix) {
-        int[][] array2 = new int[array.length][array[0].length];
         for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array.length; j++) {
-
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = array[i][j] + otherMatrix[i][j];
             }
-
         }
     }
 
@@ -65,12 +72,29 @@ public class MyMatrix {
     public void transpose() {
         int[][] resultArray = new int[array.length][array[0].length];
         for (int i = 0; i < array.length; i++) {
-            for (int j = i + 1; j < array[i].length; j++) {
-                int temp = resultArray[i][j];
-                resultArray[i][j] = resultArray[j][i];
-                resultArray[j][i] = temp;
+            for (int j = 0; j < array[i].length; j++) {
+                resultArray[j][i] = array[i][j];
             }
         }
         array = resultArray;
     }
+
+    public int getLinesNumber(){
+        return array.length;
+    }
+
+    public int getColumnsNumber(){
+        return array[0].length;
+    }
+
+    public int get(final int line, final int column){
+        return array[line][column];
+    }
+
+    public void fillWith(final int number){
+        for (int[] line : array) {
+            Arrays.fill(line, number);
+        }
+    }
+
 }
