@@ -113,6 +113,8 @@ public class MyMatrixTest {
     @Test
     public void addMatrix(){
         MyMatrix matrix = new MyMatrix(5, 3, true);
-        matrix.addMatrix();
+        matrix.printMatrix();
+        matrix.addMatrix(matrix);
+        matrix.printMatrix();
     }
 }

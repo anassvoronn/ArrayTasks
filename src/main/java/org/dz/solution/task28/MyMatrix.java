@@ -18,7 +18,7 @@ public class MyMatrix {
         }
     }
 
-    public MyMatrix(int[][] sourceArray){
+    public MyMatrix(int[][] sourceArray) {
         array = sourceArray;
         //TODO Нарушение Инкапсуляции
     }
@@ -50,8 +50,14 @@ public class MyMatrix {
 
     @Override
     public String toString() {
+        for (int[] ints : array) {
+            for (int anInt : ints) {
+                System.out.print(anInt + " ");
+            }
+            System.out.println();
+        }
         return "MyMatrix{" +
-                "array= " + array[0][0] + "\n" + array[1][1] + "\n" +array[2][2] + "\n" +
+                "\n " +  +
                 '}';
     }
 
@@ -59,18 +65,14 @@ public class MyMatrix {
     public void addMatrix(MyMatrix otherMatrix) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
-                array[i][j] = array[i][j] + otherMatrix[i][j];
+                array[i][j] = array[i][j] + otherMatrix.array[i][j];
             }
         }
     }
 
-    /*
-    Сделать не для квадратных матриц
 
-    посмотреть видео
-     */
     public void transpose() {
-        int[][] resultArray = new int[array.length][array[0].length];
+        int[][] resultArray = new int[array[0].length][array.length];
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 resultArray[j][i] = array[i][j];
@@ -79,19 +81,19 @@ public class MyMatrix {
         array = resultArray;
     }
 
-    public int getLinesNumber(){
+    public int getLinesNumber() {
         return array.length;
     }
 
-    public int getColumnsNumber(){
+    public int getColumnsNumber() {
         return array[0].length;
     }
 
-    public int get(final int line, final int column){
+    public int get(final int line, final int column) {
         return array[line][column];
     }
 
-    public void fillWith(final int number){
+    public void fillWith(final int number) {
         for (int[] line : array) {
             Arrays.fill(line, number);
         }
