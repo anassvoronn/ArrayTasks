@@ -50,15 +50,28 @@ public class MyMatrix {
 
     @Override
     public String toString() {
-        for (int[] ints : array) {
-            for (int anInt : ints) {
-                System.out.print(anInt + " ");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                stringBuilder.append(array[i][j]);
+                if (j < getColumnsNumber()){
+                    stringBuilder.append(" ");
+                }
             }
-            System.out.println();
+            if (i < getLinesNumber()){
+                stringBuilder.append("\n");
+            }
+
         }
-        return "MyMatrix{" +
-                "\n " +  +
-                '}';
+        return stringBuilder.toString();
+    }
+
+    public MyMatrix clone(){
+        int[][] newArray = new int[array.length][array[0].length];
+        for (int i = 0; i < array.length; i++){
+            System.arraycopy(array[i], 0, newArray[i], 0, array[i].length);
+        }
+        return new MyMatrix(newArray);
     }
 
     //TODO Написать тест для метода

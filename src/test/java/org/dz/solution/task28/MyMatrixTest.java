@@ -113,8 +113,12 @@ public class MyMatrixTest {
     @Test
     public void addMatrix(){
         MyMatrix matrix = new MyMatrix(5, 3, true);
-        matrix.printMatrix();
         matrix.addMatrix(matrix);
-        matrix.printMatrix();
+    }
+    // дописать тесты и to String
+    @Test
+    public void testClone(){
+        MyMatrix matrix = new MyMatrix(3, 4, true);
+        matrix.clone();
     }
 }
