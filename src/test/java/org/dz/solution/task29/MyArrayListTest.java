@@ -58,11 +58,36 @@ public class MyArrayListTest {
         Assert.assertTrue(list.add(0));
         Assert.assertTrue(list.add(-10));
         Assert.assertTrue(list.add(120));
+        Assert.assertEquals(6,list.getCapacity());
         Assert.assertEquals(Integer.valueOf(5), list.get(0));
         Assert.assertEquals(Integer.valueOf(0), list.get(1));
         Assert.assertEquals(Integer.valueOf(-10), list.get(2));
         Assert.assertEquals(Integer.valueOf(120), list.get(3));
         Assert.assertFalse(list.isEmpty());
+    }
+
+    @Test
+    public void add_8MoreElements() {
+        MyArrayList list = new MyArrayList();
+        Assert.assertTrue(list.add(5));
+        Assert.assertTrue(list.add(0));
+        Assert.assertTrue(list.add(-10));
+        Assert.assertTrue(list.add(120));
+        Assert.assertTrue(list.add(27));
+        Assert.assertTrue(list.add(-60));
+        Assert.assertTrue(list.add(1));
+        Assert.assertTrue(list.add(0));
+        Assert.assertEquals(12, list.getCapacity());
+        Assert.assertEquals(Integer.valueOf(5), list.get(0));
+        Assert.assertEquals(Integer.valueOf(0), list.get(1));
+        Assert.assertEquals(Integer.valueOf(-10), list.get(2));
+        Assert.assertEquals(Integer.valueOf(120), list.get(3));
+        Assert.assertEquals(Integer.valueOf(27), list.get(4));
+        Assert.assertEquals(Integer.valueOf(-60), list.get(5));
+        Assert.assertEquals(Integer.valueOf(1), list.get(6));
+        Assert.assertEquals(Integer.valueOf(0), list.get(7));
+        Assert.assertFalse(list.isEmpty());
+
     }
 
 }

@@ -47,21 +47,21 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public boolean add(Integer integer) {
-        if (array.length >= DEFAULT_ARRAY_CAPACITY) {
+        if (size >= array.length) {
             Integer[] newArray = new Integer[array.length * 2];
             for (int i = 0; i < array.length; i++) {
                 newArray[i] = array[i];
             }
             array = newArray;
-            array[index] = integer;
-            size++;
-            index++;
-        } else {
-            array[index] = integer;
-            size++;
-            index++;
         }
+        array[index] = integer;
+        size++;
+        index++;
         return true;
+    }
+
+    public int getCapacity() {
+        return array.length;
     }
 
     @Override
