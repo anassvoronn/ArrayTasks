@@ -111,14 +111,18 @@ public class MyMatrixTest {
     }
 
     @Test
-    public void addMatrix(){
-        MyMatrix matrix = new MyMatrix(5, 3, true);
+    public void addMatrix() {
+        MyMatrix matrix = new MyMatrix(new int[][]{{0, 4, 7}, {2, 0, -1}, {-6, 0, 5}});
         matrix.addMatrix(matrix);
+        Assert.assertEquals("0 8 14\n4 0 -2\n-12 0 10", matrix.toString());
+
     }
     // дописать тесты и to String
     @Test
-    public void testClone(){
-        MyMatrix matrix = new MyMatrix(3, 4, true);
+    public void testClone() {
+        MyMatrix matrix = new MyMatrix(new int[][]{{1, 4, 3}, {8, 0, -1}, {6, 0, 5}});
         matrix.clone();
+        Assert.assertEquals("1 4 3\n8 0 -1\n6 0 5", matrix.toString());
+
     }
 }

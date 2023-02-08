@@ -54,11 +54,11 @@ public class MyMatrix {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 stringBuilder.append(array[i][j]);
-                if (j < getColumnsNumber()){
+                if (j < array[i].length - 1){
                     stringBuilder.append(" ");
                 }
             }
-            if (i < getLinesNumber()){
+            if (i < array.length - 1){
                 stringBuilder.append("\n");
             }
 
@@ -66,9 +66,9 @@ public class MyMatrix {
         return stringBuilder.toString();
     }
 
-    public MyMatrix clone(){
+    public MyMatrix clone() {
         int[][] newArray = new int[array.length][array[0].length];
-        for (int i = 0; i < array.length; i++){
+        for (int i = 0; i < array.length; i++) {
             System.arraycopy(array[i], 0, newArray[i], 0, array[i].length);
         }
         return new MyMatrix(newArray);
