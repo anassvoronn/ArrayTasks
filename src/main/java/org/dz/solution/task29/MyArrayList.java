@@ -66,6 +66,10 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public boolean remove(Object o) {
+        Integer number = (Integer) o;
+        // вернет true если (number) найден и успешно удален, если нет то false
+        // Пустое место нужно закрыть. Делается это сдвигом всех елементов (которые справа) на один элемент на лево.
+        // Пример [1, 3, 6, 7] после удаелния 3и получаем не [1, null, 6, 7], а [1, 6, 7]
         return false;
     }
 
