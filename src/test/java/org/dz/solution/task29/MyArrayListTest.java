@@ -10,7 +10,6 @@ public class MyArrayListTest {
         MyArrayList list = new MyArrayList();
         Assert.assertEquals(0, list.size());
         Assert.assertTrue(list.isEmpty());
-        Assert.assertNull(list.get(0));
     }
 
     @Test
@@ -21,7 +20,6 @@ public class MyArrayListTest {
         Assert.assertEquals(1, list.size());
         Assert.assertFalse(list.isEmpty());
         Assert.assertEquals(Integer.valueOf(10), list.get(0));
-        Assert.assertNull(list.get(1));
     }
 
     @Test
@@ -157,7 +155,7 @@ public class MyArrayListTest {
 
         Assert.assertTrue(list.remove(Integer.valueOf(0)));
         Assert.assertTrue(list.remove(Integer.valueOf(0)));
-        Assert.assertEquals(Integer.valueOf(-6), list.get(4));
+        Assert.assertEquals(Integer.valueOf(-60), list.get(4));
         Assert.assertEquals(Integer.valueOf(1), list.get(5));
         Assert.assertEquals(6, list.size());
         Assert.assertEquals(12, list.getCapacity());
@@ -258,4 +256,33 @@ public class MyArrayListTest {
         Assert.assertEquals(12, list.getCapacity());
     }
 
+    @Test
+    public void test1_3_6_7_when_remove_6() {
+        MyArrayList list = new MyArrayList();
+
+        list.add(1);
+        list.add(3);
+        list.add(6);
+        list.add(7);
+        list.remove(Integer.valueOf(6));
+        Assert.assertEquals(6, list.getCapacity());
+        Assert.assertEquals(3, list.size());
+        Assert.assertEquals(Integer.valueOf(1), list.get(0));
+        Assert.assertEquals(Integer.valueOf(3), list.get(1));
+        Assert.assertEquals(Integer.valueOf(7), list.get(2));
+    }
+
+    @Test
+    public void test1_3_6_when_remove_3() {
+        MyArrayList list = new MyArrayList();
+
+        list.add(1);
+        list.add(3);
+        list.add(6);
+        list.remove(Integer.valueOf(3));
+        Assert.assertEquals(3, list.getCapacity());
+        Assert.assertEquals(2, list.size());
+        Assert.assertEquals(Integer.valueOf(1), list.get(0));
+        Assert.assertEquals(Integer.valueOf(6), list.get(1));
+    }
 }

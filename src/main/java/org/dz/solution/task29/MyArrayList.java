@@ -27,7 +27,12 @@ public class MyArrayList implements List<Integer> {
     public boolean contains(Object o) {
         Integer number = (Integer) o;
         // вернет true если (number) число есть в списке, если нет то false
-        return number == 0;
+        for (int i = 0; i < array.length; i++) {
+            if (Objects.equals(array[i], number)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -67,9 +72,16 @@ public class MyArrayList implements List<Integer> {
     @Override
     public boolean remove(Object o) {
         Integer number = (Integer) o;
-        // вернет true если (number) найден и успешно удален, если нет то false
-        // Пустое место нужно закрыть. Делается это сдвигом всех елементов (которые справа) на один элемент на лево.
-        // Пример [1, 3, 6, 7] после удаелния 3и получаем не [1, null, 6, 7], а [1, 6, 7]
+        for (int i = 0; i < size; i++) {
+            if (array[i].equals(number)) {
+                for (int j = i; j < size - 1; j++) {
+                    array[j] = array[j + 1];
+                }
+                array[size - 1] = null;
+                size--;
+                return true;
+            }
+        }
         return false;
     }
 
@@ -110,11 +122,15 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public void clear() {
+        //TODO написать метод clear
 
     }
 
     @Override
     public Integer get(int index) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException("Under this index " + index + " quantity " + size + " equals is null");
+        }
         return array[index];
     }
 
@@ -130,11 +146,13 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public Integer remove(int index) {
+        //TODO написать удаление по индексу и тесты + обработка index > size
         return null;
     }
 
     @Override
     public int indexOf(Object o) {
+        //TODO написать вернуть его индекс
         return 0;
     }
 
