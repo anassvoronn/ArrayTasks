@@ -355,4 +355,37 @@ public class MyArrayListTest {
         Assert.assertEquals(6, list.size());
         Assert.assertEquals(12, list.getCapacity());
     }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void remove_0IndexFromEmptyArray() {
+        MyArrayList list = new MyArrayList();
+
+        list.remove(0);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void remove_5IndexFromLength5Array() {
+        MyArrayList list = new MyArrayList();
+
+        list.add(13);
+        list.add(-6);
+        list.add(0);
+        list.add(200);
+        list.add(0);
+
+        list.remove(5);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void remove_minus1IndexFromLength5Array() {
+        MyArrayList list = new MyArrayList();
+
+        list.add(13);
+        list.add(-6);
+        list.add(0);
+        list.add(200);
+        list.add(0);
+
+        list.remove(-1);
+    }
 }

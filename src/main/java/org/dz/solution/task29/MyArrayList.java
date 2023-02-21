@@ -85,6 +85,17 @@ public class MyArrayList implements List<Integer> {
     }
 
     @Override
+    public Integer remove(int index) {
+        validateIndex(index);
+        int temp = array[index];
+        for (int i = index; i < size; i++) {
+            array[i] = array[i + 1];
+        }
+        size--;
+        return temp;
+    }
+
+    @Override
     public boolean containsAll(Collection<?> c) {
         return false;
     }
@@ -128,9 +139,7 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public Integer get(int index) {
-        if (index >= size) {
-            throw new IndexOutOfBoundsException("Index " + index + " > " + size + " Size");
-        }
+        validateIndex(index);
         return array[index];
     }
 
@@ -143,16 +152,6 @@ public class MyArrayList implements List<Integer> {
     @Override
     public void add(int index, Integer element) {
 
-    }
-
-    @Override
-    public Integer remove(int index) {
-        int temp = array[index];
-        for (int i = index; i < size; i++) {
-            array[i] = array[i + 1];
-        }
-        size--;
-        return temp;
     }
 
     @Override
@@ -192,5 +191,11 @@ public class MyArrayList implements List<Integer> {
     @Override
     public Spliterator<Integer> spliterator() {
         return List.super.spliterator();
+    }
+
+    private void validateIndex(int index){
+        if (index >= size || index < 0){
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds 0 - " + size);
+        }
     }
 }
