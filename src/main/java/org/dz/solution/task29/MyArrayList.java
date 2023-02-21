@@ -121,7 +121,6 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public void clear() {
-        //TODO написать метод clear
         for (int tempSize = size, i = size = 0; i < tempSize; i++) {
             array[i] = null;
         }
