@@ -26,7 +26,6 @@ public class MyArrayList implements List<Integer> {
     @Override
     public boolean contains(Object o) {
         Integer number = (Integer) o;
-        // вернет true если (number) число есть в списке, если нет то false
         for (int i = 0; i < array.length; i++) {
             if (Objects.equals(array[i], number)) {
                 return true;
@@ -123,19 +122,22 @@ public class MyArrayList implements List<Integer> {
     @Override
     public void clear() {
         //TODO написать метод clear
-
+        for (int tempSize = size, i = size = 0; i < tempSize; i++) {
+            array[i] = null;
+        }
     }
 
     @Override
     public Integer get(int index) {
         if (index >= size) {
-            throw new IndexOutOfBoundsException("Under this index " + index + " quantity " + size + " equals is null");
+            throw new IndexOutOfBoundsException("Index " + index + " > " + size + " Size");
         }
         return array[index];
     }
 
     @Override
     public Integer set(int index, Integer element) {
+        //TODO написать
         return null;
     }
 
@@ -146,18 +148,29 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public Integer remove(int index) {
-        //TODO написать удаление по индексу и тесты + обработка index > size
-        return null;
+        int temp = array[index];
+        for (int i = index; i < size; i++) {
+            array[i] = array[i + 1];
+        }
+        size--;
+        return temp;
     }
 
     @Override
     public int indexOf(Object o) {
-        //TODO написать вернуть его индекс
-        return 0;
+        Integer number = (Integer) o;
+        for (int i = 0; i < size; i++) {
+            if (array[i].equals(number)) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
+        //TODO написать
         return 0;
     }
 
@@ -173,6 +186,7 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public List<Integer> subList(int fromIndex, int toIndex) {
+        //TODO написать
         return null;
     }
 

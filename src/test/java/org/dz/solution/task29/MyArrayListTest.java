@@ -285,4 +285,74 @@ public class MyArrayListTest {
         Assert.assertEquals(Integer.valueOf(1), list.get(0));
         Assert.assertEquals(Integer.valueOf(6), list.get(1));
     }
+
+    @Test
+    public void clear_7MoreElements() {
+        MyArrayList list = new MyArrayList();
+
+        Assert.assertTrue(list.add(5));
+        Assert.assertTrue(list.add(0));
+        Assert.assertTrue(list.add(-10));
+        Assert.assertTrue(list.add(500));
+        Assert.assertTrue(list.add(4));
+        Assert.assertTrue(list.add(-1));
+        Assert.assertTrue(list.add(25));
+
+        Assert.assertEquals(7, list.size());
+
+        list.clear();
+
+        Assert.assertEquals(0, list.size());
+        Assert.assertEquals(12, list.getCapacity());
+    }
+
+    @Test
+    public void clear_5MoreElements() {
+        MyArrayList list = new MyArrayList();
+
+        Assert.assertTrue(list.add(5));
+        Assert.assertTrue(list.add(0));
+        Assert.assertTrue(list.add(-10));
+        Assert.assertTrue(list.add(500));
+        Assert.assertTrue(list.add(4));
+
+        Assert.assertEquals(5, list.size());
+
+        list.clear();
+
+        Assert.assertEquals(0, list.size());
+        Assert.assertEquals(6, list.getCapacity());
+
+        list.clear();
+
+        Assert.assertEquals(0, list.size());
+        Assert.assertEquals(6, list.getCapacity());
+    }
+
+    @Test
+    public void remove_removedByIndexOutOfBoundsException() {
+        MyArrayList list = new MyArrayList();
+
+        Assert.assertTrue(list.add(5));
+        Assert.assertTrue(list.add(0));
+        Assert.assertTrue(list.add(-10));
+        Assert.assertTrue(list.add(120));
+        Assert.assertTrue(list.add(27));
+        Assert.assertTrue(list.add(-60));
+        Assert.assertTrue(list.add(1));
+        Assert.assertTrue(list.add(0));
+
+        Assert.assertEquals(Integer.valueOf(120), list.remove(3));
+        Assert.assertEquals(7, list.size());
+        Assert.assertFalse(list.contains(120));
+        Assert.assertEquals(Integer.valueOf(27), list.get(3));
+
+        Assert.assertEquals(Integer.valueOf(-60), list.remove(4));
+        Assert.assertEquals(6, list.size());
+        Assert.assertFalse(list.contains(-60));
+        Assert.assertEquals(Integer.valueOf(1), list.get(4));
+
+        Assert.assertEquals(6, list.size());
+        Assert.assertEquals(12, list.getCapacity());
+    }
 }
