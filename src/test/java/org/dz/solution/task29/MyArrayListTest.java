@@ -404,4 +404,19 @@ public class MyArrayListTest {
         Assert.assertEquals(3, list.getCapacity());
     }
 
+    @Test
+    public void indexOf_withNullInTheList() {
+        MyArrayList list = new MyArrayList();
+
+        list.add(6);
+        list.add(null);
+        list.add(0);
+        
+        Assert.assertEquals(0, list.indexOf(6));
+        Assert.assertEquals(1, list.indexOf(null));
+        Assert.assertEquals(2, list.indexOf(0));
+        
+        Assert.assertEquals(3, list.size());
+        Assert.assertEquals(3, list.getCapacity());
+    }
 }
