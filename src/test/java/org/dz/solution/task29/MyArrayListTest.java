@@ -388,4 +388,20 @@ public class MyArrayListTest {
 
         list.remove(-1);
     }
+
+    @Test
+    public void remove_fixedBugWithShiftToLeft() {
+        MyArrayList list = new MyArrayList();
+
+        list.add(6);
+        list.add(-15);
+        list.add(0);
+
+        list.remove(1);
+        Assert.assertEquals(Integer.valueOf(6), list.get(0));
+        Assert.assertEquals(Integer.valueOf(0), list.get(1));
+        Assert.assertEquals(2, list.size());
+        Assert.assertEquals(3, list.getCapacity());
+    }
+
 }

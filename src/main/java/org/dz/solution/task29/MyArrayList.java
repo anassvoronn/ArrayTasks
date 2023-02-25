@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.function.UnaryOperator;
 
 public class MyArrayList implements List<Integer> {
+    private static final int INDEX_WHEN_NOTHING_FOUND = -1;
     private final int DEFAULT_ARRAY_CAPACITY = 3;
     private Integer[] array;
     private int size;
@@ -26,12 +27,7 @@ public class MyArrayList implements List<Integer> {
     @Override
     public boolean contains(Object o) {
         Integer number = (Integer) o;
-        for (int i = 0; i < array.length; i++) {
-            if (Objects.equals(array[i], number)) {
-                return true;
-            }
-        }
-        return false;
+        return indexOf(number) != -1;
     }
 
     @Override
@@ -51,9 +47,9 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public boolean add(Integer integer) {
-        if (size >= array.length) {
+        if (size == array.length) {
             Integer[] newArray = new Integer[array.length * 2];
-            for (int i = 0; i < array.length; i++) {
+            for (int i = 0; i < size; i++) {
                 newArray[i] = array[i];
             }
             array = newArray;
@@ -71,28 +67,28 @@ public class MyArrayList implements List<Integer> {
     @Override
     public boolean remove(Object o) {
         Integer number = (Integer) o;
-        for (int i = 0; i < size; i++) {
-            if (array[i].equals(number)) {
-                for (int j = i; j < size - 1; j++) {
-                    array[j] = array[j + 1];
-                }
-                array[size - 1] = null;
-                size--;
-                return true;
-            }
+        int index = indexOf(number);
+        if (index == INDEX_WHEN_NOTHING_FOUND) {
+            return false;
         }
-        return false;
+        remove(index);
+        return true;
     }
 
     @Override
     public Integer remove(int index) {
         validateIndex(index);
         int temp = array[index];
-        for (int i = index; i < size; i++) {
-            array[i] = array[i + 1];
-        }
+        shiftToLeft(index);
+        array[size - 1] = null;
         size--;
         return temp;
+    }
+
+    private void shiftToLeft(int index) {
+        for (int i = index; i < size - 1; i++) {
+            array[i] = array[i + 1];
+        }
     }
 
     @Override
@@ -132,9 +128,8 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public void clear() {
-        for (int tempSize = size, i = size = 0; i < tempSize; i++) {
-            array[i] = null;
-        }
+        array = new Integer[array.length];
+        size = 0;
     }
 
     @Override
@@ -145,7 +140,8 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public Integer set(int index, Integer element) {
-        //TODO написать
+        //TODO написать замену элемента в указанной месте index на переданный element
+        //[1, -4, 0, 1, 8] если индек = 1, а элемент = null [1, null, 0, 1, 8] вернуть -4
         return null;
     }
 
@@ -163,12 +159,14 @@ public class MyArrayList implements List<Integer> {
             }
         }
 
-        return -1;
+        return INDEX_WHEN_NOTHING_FOUND;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        //TODO написать
+        //TODO написать возвращение последнего вхождения указаного значения
+        //[1, -4, 0, 1, 8] если приходит 1 то вернуть 3(его индекс)
+        Integer number = (Integer) o;
         return 0;
     }
 
@@ -184,8 +182,9 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public List<Integer> subList(int fromIndex, int toIndex) {
-        //TODO написать
-        return null;
+        //TODO вернуть содержимое данного массива
+        //[1, -4, 0, 1, 8]
+        return new MyArrayList(); //должен содержать [1, -4] если fromIndex и toIndex = 0 и 2
     }
 
     @Override
@@ -193,8 +192,8 @@ public class MyArrayList implements List<Integer> {
         return List.super.spliterator();
     }
 
-    private void validateIndex(int index){
-        if (index >= size || index < 0){
+    private void validateIndex(int index) {
+        if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Index " + index + " is out of bounds 0 - " + size);
         }
     }
