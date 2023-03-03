@@ -419,4 +419,37 @@ public class MyArrayListTest {
         Assert.assertEquals(3, list.size());
         Assert.assertEquals(3, list.getCapacity());
     }
+
+    @Test
+    public void set() {
+        MyArrayList list = new MyArrayList();
+
+        list.add(1);
+        list.add(-4);
+        list.add(0);
+        list.add(1);
+        list.add(8);
+
+        Assert.assertEquals(Integer.valueOf(-4) ,list.set(1, 500));
+
+        Assert.assertEquals(5, list.size());
+        Assert.assertEquals(6, list.getCapacity());
+    }
+
+    @Test
+    public void lastIndexOf(){
+        MyArrayList list = new MyArrayList();
+
+        list.add(13);
+        list.add(-5);
+        list.add(200);
+        list.add(0);
+        list.add(1);
+
+        Assert.assertEquals(2,list.lastIndexOf(200));
+        Assert.assertEquals(Integer.valueOf(500), list.get(2));
+
+        Assert.assertEquals(5,list.size());
+        Assert.assertEquals(6,list.getCapacity());
+    }
 }

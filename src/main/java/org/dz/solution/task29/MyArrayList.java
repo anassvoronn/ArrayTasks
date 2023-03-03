@@ -142,7 +142,9 @@ public class MyArrayList implements List<Integer> {
     public Integer set(int index, Integer element) {
         //TODO написать замену элемента в указанной месте index на переданный element
         //[1, -4, 0, 1, 8] если индек = 1, а элемент = null [1, null, 0, 1, 8] вернуть -4
-        return null;
+        int number = array[index];
+        array[index] = element;
+        return number;
     }
 
     @Override
@@ -167,7 +169,12 @@ public class MyArrayList implements List<Integer> {
         //TODO написать возвращение последнего вхождения указаного значения
         //[1, -4, 0, 1, 8] если приходит 1 то вернуть 3(его индекс)
         Integer number = (Integer) o;
-        return 0;
+        for (int i = size; i >= 0; i--) {
+            if (Objects.equals(array[i], number)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
