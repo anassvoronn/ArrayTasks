@@ -411,11 +411,11 @@ public class MyArrayListTest {
         list.add(6);
         list.add(null);
         list.add(0);
-        
+
         Assert.assertEquals(0, list.indexOf(6));
         Assert.assertEquals(1, list.indexOf(null));
         Assert.assertEquals(2, list.indexOf(0));
-        
+
         Assert.assertEquals(3, list.size());
         Assert.assertEquals(3, list.getCapacity());
     }
@@ -430,14 +430,14 @@ public class MyArrayListTest {
         list.add(1);
         list.add(8);
 
-        Assert.assertEquals(Integer.valueOf(-4) ,list.set(1, 500));
+        Assert.assertEquals(Integer.valueOf(-4), list.set(1, 500));
 
         Assert.assertEquals(5, list.size());
         Assert.assertEquals(6, list.getCapacity());
     }
 
     @Test
-    public void lastIndexOf(){
+    public void lastIndexOf() {
         MyArrayList list = new MyArrayList();
 
         list.add(13);
@@ -446,10 +446,10 @@ public class MyArrayListTest {
         list.add(0);
         list.add(1);
 
-        Assert.assertEquals(2,list.lastIndexOf(200));
+        Assert.assertEquals(2, list.lastIndexOf(200));
         Assert.assertEquals(Integer.valueOf(500), list.get(2));
 
-        Assert.assertEquals(5,list.size());
-        Assert.assertEquals(6,list.getCapacity());
+        Assert.assertEquals(5, list.size());
+        Assert.assertEquals(6, list.getCapacity());
     }
 }
