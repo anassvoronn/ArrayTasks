@@ -431,7 +431,7 @@ public class MyArrayListTest {
         list.add(8);
 
         Assert.assertEquals(Integer.valueOf(-4), list.set(1, 500));
-
+        // TODO не вижу тут проверки что 500 стало на место
         Assert.assertEquals(5, list.size());
         Assert.assertEquals(6, list.getCapacity());
     }
@@ -451,5 +451,19 @@ public class MyArrayListTest {
 
         Assert.assertEquals(5, list.size());
         Assert.assertEquals(6, list.getCapacity());
+    }
+
+    @Test
+    public void lastIndexOf_indexOutOfBoundsException() {
+        MyArrayList list = new MyArrayList();
+
+        list.add(13);
+        list.add(-5);
+        list.add(200);
+
+        Assert.assertEquals(2, list.lastIndexOf(200));
+
+        Assert.assertEquals(3, list.size());
+        Assert.assertEquals(3, list.getCapacity());
     }
 }
