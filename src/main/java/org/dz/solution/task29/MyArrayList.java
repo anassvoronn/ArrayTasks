@@ -14,6 +14,10 @@ public class MyArrayList implements List<Integer> {
         array = new Integer[DEFAULT_ARRAY_CAPACITY];
     }
 
+    public MyArrayList(int arrayCapacity) {
+        array = new Integer[arrayCapacity];
+    }
+
     @Override
     public int size() {
         return size;
@@ -142,6 +146,7 @@ public class MyArrayList implements List<Integer> {
     public Integer set(int index, Integer element) {
         //TODO написать замену элемента в указанной месте index на переданный element
         //[1, -4, 0, 1, 8] если индек = 1, а элемент = null [1, null, 0, 1, 8] вернуть -4
+        validateIndex(index);
         int number = array[index];
         array[index] = element;
         return number;
@@ -169,7 +174,7 @@ public class MyArrayList implements List<Integer> {
         //TODO написать возвращение последнего вхождения указаного значения
         //[1, -4, 0, 1, 8] если приходит 1 то вернуть 3(его индекс)
         Integer number = (Integer) o;
-        for (int i = size; i >= 0; i--) {
+        for (int i = size - 1; i >= 0; i--) {
             if (Objects.equals(array[i], number)) {
                 return i;
             }
@@ -191,6 +196,21 @@ public class MyArrayList implements List<Integer> {
     public List<Integer> subList(int fromIndex, int toIndex) {
         //TODO вернуть содержимое данного массива
         //[1, -4, 0, 1, 8]
+        validateIndex(fromIndex);
+        validateIndex(toIndex);
+        //Высчитать длину
+        //Создать массив нужной длины
+        //Заполнить массив
+        //вернуть его
+        //ArrayList в конструкторе написать валидацию чтобы копэсити не был отрицательным
+        //Удалить поле индекс
+        int arraySize = toIndex - fromIndex;
+        MyArrayList list = new MyArrayList(arraySize);
+        for (int i = 0; i < size; i++) {
+            if (i == fromIndex) {
+
+            }
+        }
         return new MyArrayList(); //должен содержать [1, -4] если fromIndex и toIndex = 0 и 2
     }
 

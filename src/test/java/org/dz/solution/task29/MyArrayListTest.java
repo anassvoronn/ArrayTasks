@@ -431,6 +431,8 @@ public class MyArrayListTest {
         list.add(8);
 
         Assert.assertEquals(Integer.valueOf(-4), list.set(1, 500));
+        Assert.assertFalse(list.contains(-4));
+        Assert.assertEquals(Integer.valueOf(500), list.get(2));
 
         Assert.assertEquals(5, list.size());
         Assert.assertEquals(6, list.getCapacity());
@@ -447,9 +449,20 @@ public class MyArrayListTest {
         list.add(1);
 
         Assert.assertEquals(2, list.lastIndexOf(200));
-        Assert.assertEquals(Integer.valueOf(500), list.get(2));
 
         Assert.assertEquals(5, list.size());
         Assert.assertEquals(6, list.getCapacity());
+    }
+
+    @Test
+    public void subList() {
+        MyArrayList list = new MyArrayList();
+
+        list.add(3);
+        list.add(18);
+        list.add(-7);
+        list.add(0);
+        list.add(25);
+        list.add(59);
     }
 }
