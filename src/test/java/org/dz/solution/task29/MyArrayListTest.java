@@ -455,6 +455,20 @@ public class MyArrayListTest {
     }
 
     @Test
+    public void lastIndexOf_indexOutOfBoundsException() {
+        MyArrayList list = new MyArrayList();
+
+        list.add(13);
+        list.add(-5);
+        list.add(200);
+
+        Assert.assertEquals(2, list.lastIndexOf(200));
+
+        Assert.assertEquals(3, list.size());
+        Assert.assertEquals(3, list.getCapacity());
+    }
+
+    @Test
     public void subList() {
         MyArrayList list = new MyArrayList();
 
