@@ -432,7 +432,7 @@ public class MyArrayListTest {
 
         Assert.assertEquals(Integer.valueOf(-4), list.set(1, 500));
         Assert.assertFalse(list.contains(-4));
-        Assert.assertEquals(Integer.valueOf(500), list.get(2));
+        Assert.assertEquals(Integer.valueOf(500), list.get(1));
 
         Assert.assertEquals(5, list.size());
         Assert.assertEquals(6, list.getCapacity());
@@ -478,5 +478,7 @@ public class MyArrayListTest {
         list.add(0);
         list.add(25);
         list.add(59);
+        list.add(200);
+        list.add(5);
     }
 }

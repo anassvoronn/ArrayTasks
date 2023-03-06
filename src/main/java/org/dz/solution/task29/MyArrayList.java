@@ -161,6 +161,9 @@ public class MyArrayList implements List<Integer> {
     public int indexOf(Object o) {
         Integer number = (Integer) o;
         for (int i = 0; i < size; i++) {
+            if (number == null) {
+                return i;
+            }
             if (array[i].equals(number)) {
                 return i;
             }
@@ -171,15 +174,13 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public int lastIndexOf(Object o) {
-        //TODO написать возвращение последнего вхождения указаного значения
-        //[1, -4, 0, 1, 8] если приходит 1 то вернуть 3(его индекс)
         Integer number = (Integer) o;
         for (int i = size - 1; i >= 0; i--) {
             if (Objects.equals(array[i], number)) {
                 return i;
             }
         }
-        return -1;
+        return INDEX_WHEN_NOTHING_FOUND;
     }
 
     @Override
@@ -194,24 +195,17 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public List<Integer> subList(int fromIndex, int toIndex) {
-        //TODO вернуть содержимое данного массива
-        //[1, -4, 0, 1, 8]
+        if (fromIndex < 0 || toIndex > size || fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("Breach of condition");
+        }
         validateIndex(fromIndex);
         validateIndex(toIndex);
-        //Высчитать длину
-        //Создать массив нужной длины
-        //Заполнить массив
-        //вернуть его
-        //ArrayList в конструкторе написать валидацию чтобы копэсити не был отрицательным
-        //Удалить поле индекс
         int arraySize = toIndex - fromIndex;
         MyArrayList list = new MyArrayList(arraySize);
-        for (int i = 0; i < size; i++) {
-            if (i == fromIndex) {
-
-            }
+        for (int i = fromIndex; i < toIndex; i++) {
+            list.add(i);
         }
-        return new MyArrayList(); //должен содержать [1, -4] если fromIndex и toIndex = 0 и 2
+        return list;
     }
 
     @Override
