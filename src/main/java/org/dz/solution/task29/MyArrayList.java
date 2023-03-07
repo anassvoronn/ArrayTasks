@@ -144,8 +144,6 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public Integer set(int index, Integer element) {
-        //TODO написать замену элемента в указанной месте index на переданный element
-        //[1, -4, 0, 1, 8] если индек = 1, а элемент = null [1, null, 0, 1, 8] вернуть -4
         validateIndex(index);
         int number = array[index];
         array[index] = element;
@@ -161,10 +159,7 @@ public class MyArrayList implements List<Integer> {
     public int indexOf(Object o) {
         Integer number = (Integer) o;
         for (int i = 0; i < size; i++) {
-            if (number == null) {
-                return i;
-            }
-            if (array[i].equals(number)) {
+            if (Objects.equals(array[i], number)) {
                 return i;
             }
         }
@@ -195,8 +190,8 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public List<Integer> subList(int fromIndex, int toIndex) {
-        if (fromIndex < 0 || toIndex > size || fromIndex > toIndex) {
-            throw new IndexOutOfBoundsException("Breach of condition");
+        if (fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("fromIndex " + fromIndex + " > " + toIndex + " toIndex");
         }
         validateIndex(fromIndex);
         validateIndex(toIndex);
