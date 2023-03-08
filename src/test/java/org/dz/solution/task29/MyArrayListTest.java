@@ -7,14 +7,14 @@ public class MyArrayListTest {
 
     @Test
     public void testConstructor() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
         Assert.assertEquals(0, list.size());
         Assert.assertTrue(list.isEmpty());
     }
 
     @Test
     public void add() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
         boolean result = list.add(10);
         Assert.assertTrue(result);
         Assert.assertEquals(1, list.size());
@@ -24,7 +24,7 @@ public class MyArrayListTest {
 
     @Test
     public void add_3MoreElements() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
         Assert.assertTrue(list.add(-10));
@@ -38,7 +38,7 @@ public class MyArrayListTest {
 
     @Test
     public void add_2MoreElements() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
         Assert.assertEquals(2, list.size());
@@ -50,7 +50,7 @@ public class MyArrayListTest {
 
     @Test
     public void add_4MoreElements() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
         Assert.assertTrue(list.add(-10));
@@ -66,7 +66,7 @@ public class MyArrayListTest {
 
     @Test
     public void add_8MoreElements() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
         Assert.assertTrue(list.add(-10));
@@ -91,7 +91,7 @@ public class MyArrayListTest {
 
     @Test
     public void size() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
@@ -108,7 +108,7 @@ public class MyArrayListTest {
 
     @Test
     public void contains_withBigList() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
@@ -142,7 +142,7 @@ public class MyArrayListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void remove_removedIndexOutOfBoundsException() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
@@ -164,7 +164,7 @@ public class MyArrayListTest {
 
     @Test
     public void remove_removedSomeElementsOfTheList() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
@@ -190,7 +190,7 @@ public class MyArrayListTest {
 
     @Test
     public void remove_removedAllElementsOfTheList() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
@@ -258,7 +258,7 @@ public class MyArrayListTest {
 
     @Test
     public void test1_3_6_7_when_remove_6() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(1);
         list.add(3);
@@ -274,7 +274,7 @@ public class MyArrayListTest {
 
     @Test
     public void test1_3_6_when_remove_3() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(1);
         list.add(3);
@@ -288,7 +288,7 @@ public class MyArrayListTest {
 
     @Test
     public void clear_7MoreElements() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
@@ -308,7 +308,7 @@ public class MyArrayListTest {
 
     @Test
     public void clear_5MoreElements() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
@@ -331,7 +331,7 @@ public class MyArrayListTest {
 
     @Test
     public void remove_removedByIndexOutOfBoundsException() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         Assert.assertTrue(list.add(5));
         Assert.assertTrue(list.add(0));
@@ -358,14 +358,14 @@ public class MyArrayListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void remove_0IndexFromEmptyArray() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.remove(0);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void remove_5IndexFromLength5Array() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(13);
         list.add(-6);
@@ -378,7 +378,7 @@ public class MyArrayListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void remove_minus1IndexFromLength5Array() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(13);
         list.add(-6);
@@ -391,7 +391,7 @@ public class MyArrayListTest {
 
     @Test
     public void remove_fixedBugWithShiftToLeft() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(6);
         list.add(-15);
@@ -406,7 +406,7 @@ public class MyArrayListTest {
 
     @Test
     public void indexOf_withNullInTheList() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(6);
         list.add(null);
@@ -422,7 +422,7 @@ public class MyArrayListTest {
 
     @Test
     public void set() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(1);
         list.add(-4);
@@ -440,7 +440,7 @@ public class MyArrayListTest {
 
     @Test
     public void lastIndexOf() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(13);
         list.add(-5);
@@ -456,7 +456,7 @@ public class MyArrayListTest {
 
     @Test
     public void lastIndexOf_indexOutOfBoundsException() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(13);
         list.add(-5);
@@ -470,7 +470,7 @@ public class MyArrayListTest {
 
     @Test
     public void subList() {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<Integer> list = new MyArrayList<>();
 
         list.add(3);
         list.add(18);
@@ -481,7 +481,7 @@ public class MyArrayListTest {
         list.add(200);
         list.add(5);
 
-        MyArrayList subList = (MyArrayList) list.subList(1, 5);
+        MyArrayList<Integer> subList = (MyArrayList<Integer>) list.subList(1, 5);
 
         Assert.assertEquals(Integer.valueOf(18), subList.get(0));
         Assert.assertEquals(Integer.valueOf(-7), subList.get(1));
@@ -492,5 +492,73 @@ public class MyArrayListTest {
         Assert.assertEquals(4, subList.size());
         Assert.assertEquals(4, subList.getCapacity());
 
+    }
+
+    @Test
+    public void remove_removedAllElementsOfTheListWithString() {
+        MyArrayList<String> list = new MyArrayList<>();
+
+        Assert.assertTrue(list.add("5"));
+        Assert.assertTrue(list.add("0"));
+        Assert.assertTrue(list.add("-10"));
+        Assert.assertTrue(list.add("120"));
+        Assert.assertTrue(list.add("27"));
+        Assert.assertTrue(list.add("-60"));
+        Assert.assertTrue(list.add("1"));
+        Assert.assertTrue(list.add("0"));
+
+        Assert.assertFalse(list.remove("-5"));
+        Assert.assertFalse(list.remove("10000"));
+        Assert.assertFalse(list.remove("10"));
+        Assert.assertFalse(list.remove("-120"));
+        Assert.assertEquals(8, list.size());
+
+        Assert.assertTrue(list.remove("5"));
+        Assert.assertEquals(7, list.size());
+        Assert.assertEquals(7, list.size());
+        Assert.assertFalse(list.contains("5"));
+        Assert.assertEquals("0", list.get(0));
+
+        Assert.assertTrue(list.remove("0"));
+        Assert.assertEquals(6, list.size());
+        Assert.assertTrue(list.contains("0"));
+        Assert.assertEquals("-10", list.get(0));
+
+        Assert.assertTrue(list.remove("-10"));
+        Assert.assertEquals(5, list.size());
+        Assert.assertFalse(list.contains("-10"));
+        Assert.assertEquals("120", list.get(0));
+
+        Assert.assertTrue(list.remove("120"));
+        Assert.assertEquals(4, list.size());
+        Assert.assertFalse(list.contains("120"));
+        Assert.assertEquals("27", list.get(0));
+
+        Assert.assertTrue(list.remove("27"));
+        Assert.assertEquals(3, list.size());
+        Assert.assertFalse(list.contains("27"));
+        Assert.assertEquals("-60", list.get(0));
+
+        Assert.assertTrue(list.remove("-60"));
+        Assert.assertEquals(2, list.size());
+        Assert.assertFalse(list.contains("-60"));
+        Assert.assertEquals("1", list.get(0));
+
+        Assert.assertTrue(list.remove("1"));
+        Assert.assertEquals(1, list.size());
+        Assert.assertFalse(list.contains("1"));
+        Assert.assertEquals("0", list.get(0));
+
+        Assert.assertTrue(list.remove("0"));
+        Assert.assertEquals(0, list.size());
+        Assert.assertFalse(list.contains("0"));
+
+        Assert.assertFalse(list.remove("-27"));
+        Assert.assertFalse(list.remove("60"));
+        Assert.assertFalse(list.remove("-1"));
+        Assert.assertFalse(list.remove("10000000"));
+
+        Assert.assertEquals(0, list.size());
+        Assert.assertEquals(12, list.getCapacity());
     }
 }

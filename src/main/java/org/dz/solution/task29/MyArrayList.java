@@ -3,19 +3,18 @@ package org.dz.solution.task29;
 import java.util.*;
 import java.util.function.UnaryOperator;
 
-public class MyArrayList implements List<Integer> {
+public class MyArrayList<E> implements List<E> {
     private static final int INDEX_WHEN_NOTHING_FOUND = -1;
     private final int DEFAULT_ARRAY_CAPACITY = 3;
-    private Integer[] array;
+    private Object[] array;
     private int size;
-    private int index;
 
     public MyArrayList() {
-        array = new Integer[DEFAULT_ARRAY_CAPACITY];
+        array = new Object[DEFAULT_ARRAY_CAPACITY];
     }
 
     public MyArrayList(int arrayCapacity) {
-        array = new Integer[arrayCapacity];
+        array = new Object[arrayCapacity];
     }
 
     @Override
@@ -30,12 +29,11 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public boolean contains(Object o) {
-        Integer number = (Integer) o;
-        return indexOf(number) != -1;
+        return indexOf(o) != -1;
     }
 
     @Override
-    public Iterator<Integer> iterator() {
+    public Iterator<E> iterator() {
         return null;
     }
 
@@ -50,17 +48,16 @@ public class MyArrayList implements List<Integer> {
     }
 
     @Override
-    public boolean add(Integer integer) {
+    public boolean add(E element) {
         if (size == array.length) {
-            Integer[] newArray = new Integer[array.length * 2];
+            Object[] newArray = new Object[array.length * 2];
             for (int i = 0; i < size; i++) {
                 newArray[i] = array[i];
             }
             array = newArray;
         }
-        array[index] = integer;
+        array[size] = element;
         size++;
-        index++;
         return true;
     }
 
@@ -70,8 +67,7 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public boolean remove(Object o) {
-        Integer number = (Integer) o;
-        int index = indexOf(number);
+        int index = indexOf(o);
         if (index == INDEX_WHEN_NOTHING_FOUND) {
             return false;
         }
@@ -80,9 +76,9 @@ public class MyArrayList implements List<Integer> {
     }
 
     @Override
-    public Integer remove(int index) {
+    public E remove(int index) {
         validateIndex(index);
-        int temp = array[index];
+        E temp = (E) array[index];
         shiftToLeft(index);
         array[size - 1] = null;
         size--;
@@ -100,13 +96,15 @@ public class MyArrayList implements List<Integer> {
         return false;
     }
 
+
     @Override
-    public boolean addAll(Collection<? extends Integer> c) {
+    public boolean addAll(Collection<? extends E> c) {
         return false;
     }
 
+
     @Override
-    public boolean addAll(int index, Collection<? extends Integer> c) {
+    public boolean addAll(int index, Collection<? extends E> c) {
         return false;
     }
 
@@ -121,12 +119,12 @@ public class MyArrayList implements List<Integer> {
     }
 
     @Override
-    public void replaceAll(UnaryOperator<Integer> operator) {
+    public void replaceAll(UnaryOperator<E> operator) {
         List.super.replaceAll(operator);
     }
 
     @Override
-    public void sort(Comparator<? super Integer> c) {
+    public void sort(Comparator<? super E> c) {
         List.super.sort(c);
     }
 
@@ -137,29 +135,28 @@ public class MyArrayList implements List<Integer> {
     }
 
     @Override
-    public Integer get(int index) {
+    public E get(int index) {
         validateIndex(index);
-        return array[index];
+        return (E) array[index];
     }
 
     @Override
-    public Integer set(int index, Integer element) {
+    public E set(int index, E element) {
         validateIndex(index);
-        int number = array[index];
+        E number = (E) array[index];
         array[index] = element;
         return number;
     }
 
     @Override
-    public void add(int index, Integer element) {
+    public void add(int index, E element) {
 
     }
 
     @Override
     public int indexOf(Object o) {
-        Integer number = (Integer) o;
         for (int i = 0; i < size; i++) {
-            if (Objects.equals(array[i], number)) {
+            if (Objects.equals(array[i], o)) {
                 return i;
             }
         }
@@ -169,9 +166,8 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public int lastIndexOf(Object o) {
-        Integer number = (Integer) o;
         for (int i = size - 1; i >= 0; i--) {
-            if (Objects.equals(array[i], number)) {
+            if (Objects.equals(array[i], o)) {
                 return i;
             }
         }
@@ -179,17 +175,17 @@ public class MyArrayList implements List<Integer> {
     }
 
     @Override
-    public ListIterator<Integer> listIterator() {
+    public ListIterator<E> listIterator() {
         return null;
     }
 
     @Override
-    public ListIterator<Integer> listIterator(int index) {
+    public ListIterator<E> listIterator(int index) {
         return null;
     }
 
     @Override
-    public List<Integer> subList(int fromIndex, int toIndex) {
+    public List<E> subList(int fromIndex, int toIndex) {
         //TODO найти баг
         if (fromIndex > toIndex) {
             throw new IndexOutOfBoundsException("fromIndex " + fromIndex + " > " + toIndex + " toIndex");
@@ -197,15 +193,15 @@ public class MyArrayList implements List<Integer> {
         validateIndex(fromIndex);
         validateIndex(toIndex);
         int arraySize = toIndex - fromIndex;
-        MyArrayList list = new MyArrayList(arraySize);
+        MyArrayList<E> list = new MyArrayList<>(arraySize);
         for (int i = fromIndex; i < toIndex; i++) {
-            list.add(i);
+            // list.add(i);
         }
-        return list;
+        return (List<E>) list;
     }
 
     @Override
-    public Spliterator<Integer> spliterator() {
+    public Spliterator<E> spliterator() {
         return List.super.spliterator();
     }
 
