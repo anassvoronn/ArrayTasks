@@ -190,6 +190,7 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public List<Integer> subList(int fromIndex, int toIndex) {
+        //TODO найти баг
         if (fromIndex > toIndex) {
             throw new IndexOutOfBoundsException("fromIndex " + fromIndex + " > " + toIndex + " toIndex");
         }

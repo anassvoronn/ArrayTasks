@@ -480,5 +480,17 @@ public class MyArrayListTest {
         list.add(59);
         list.add(200);
         list.add(5);
+
+        MyArrayList subList = (MyArrayList) list.subList(1, 5);
+
+        Assert.assertEquals(Integer.valueOf(18), subList.get(0));
+        Assert.assertEquals(Integer.valueOf(-7), subList.get(1));
+        Assert.assertEquals(Integer.valueOf(0), subList.get(2));
+        Assert.assertEquals(Integer.valueOf(25), subList.get(3));
+
+
+        Assert.assertEquals(4, subList.size());
+        Assert.assertEquals(4, subList.getCapacity());
+
     }
 }
