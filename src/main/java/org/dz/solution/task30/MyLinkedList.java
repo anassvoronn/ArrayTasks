@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class MyLinkedList<E> implements List<E> {
+    private Node<E> first;
+    private int size;
+
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
@@ -37,8 +40,19 @@ public class MyLinkedList<E> implements List<E> {
     }
 
     @Override
-    public boolean add(E e) {
-        return false;
+    public boolean add(E data) {
+        Node<E> node = new Node<>(data, null);
+        size++;
+        if (first == null) {
+            first = node;
+            return true;
+        }
+        Node<E> current = first;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = node;
+        return true;
     }
 
     @Override
@@ -78,7 +92,17 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public E get(int index) {
-        return null;
+        if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException("Points to a non-existent index = " + index +
+                    " when size = " + size);
+        }
+        Node<E> current = first;
+        int currentIndex = 0;
+        while (currentIndex < index) {
+            current = current.next;
+            currentIndex++;
+        }
+        return current.data;
     }
 
     @Override
@@ -119,5 +143,15 @@ public class MyLinkedList<E> implements List<E> {
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
         return null;
+    }
+
+    private static class Node<E> {
+        private E data;
+        private Node<E> next;
+
+        private Node(E data, Node<E> next) {
+            this.data = data;
+            this.next = next;
+        }
     }
 }
