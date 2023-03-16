@@ -16,12 +16,14 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        //TODO Реализовать метод
+        return size == 0;
     }
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        //TODO Реализовать метод
+        return indexOf(o) != -1;
     }
 
     @Override
@@ -87,6 +89,7 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public void clear() {
+        //TODO Реализовать метод
 
     }
 
@@ -122,11 +125,23 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        //TODO Реализовать метод
+        int index = 0;
+        Node<E> current = first;
+        while (current != null) {
+            if (o.equals(current.data)) {
+                return index;
+            }
+            current = current.next;
+            index++;
+        }
+
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
+        //TODO Реализовать последним
         return 0;
     }
 

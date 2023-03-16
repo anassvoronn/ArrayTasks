@@ -408,6 +408,21 @@ public class MyLinkedListTest {
     }
 
     @Test
+    public void indexOf() {
+        List<Integer> list = new MyLinkedList<>();
+
+        list.add(6);
+        list.add(13);
+        list.add(0);
+
+        Assert.assertEquals(0, list.indexOf(6));
+        Assert.assertEquals(1, list.indexOf(13));
+        Assert.assertEquals(2, list.indexOf(0));
+
+        Assert.assertEquals(3, list.size());
+    }
+
+    @Test
     public void set() {
         List<Integer> list = new MyLinkedList<>();
 
