@@ -90,7 +90,15 @@ public class MyLinkedList<E> implements List<E> {
     @Override
     public void clear() {
         //TODO Реализовать метод
-
+        Node<E> current = first;
+        while (current != null){
+            Node<E> next = current.next;
+            current.data = null;
+            current.next = null;
+            current = next;
+            size--;
+        }
+        first = null;
     }
 
     @Override
@@ -128,14 +136,20 @@ public class MyLinkedList<E> implements List<E> {
         //TODO Реализовать метод
         int index = 0;
         Node<E> current = first;
-        while (current != null) {
-            if (o.equals(current.data)) {
+        while (current == null){
+            if (current.data == null) {
                 return index;
             }
             current = current.next;
             index++;
         }
-
+        while (current != null) {
+            if (o == current.data) {
+                return index;
+            }
+            current = current.next;
+            index++;
+        }
         return -1;
     }
 
