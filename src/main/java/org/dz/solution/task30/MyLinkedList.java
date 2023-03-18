@@ -1,11 +1,9 @@
 package org.dz.solution.task30;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class MyLinkedList<E> implements List<E> {
+    private static final int INDEX_WHEN_NOTHING_FOUND = -1;
     private Node<E> first;
     private int size;
 
@@ -16,13 +14,11 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public boolean isEmpty() {
-        //TODO Реализовать метод
         return size == 0;
     }
 
     @Override
     public boolean contains(Object o) {
-        //TODO Реализовать метод
         return indexOf(o) != -1;
     }
 
@@ -89,9 +85,8 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public void clear() {
-        //TODO Реализовать метод
         Node<E> current = first;
-        while (current != null){
+        while (current != null) {
             Node<E> next = current.next;
             current.data = null;
             current.next = null;
@@ -133,24 +128,16 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public int indexOf(Object o) {
-        //TODO Реализовать метод
         int index = 0;
         Node<E> current = first;
-        while (current == null){
-            if (current.data == null) {
-                return index;
-            }
-            current = current.next;
-            index++;
-        }
         while (current != null) {
-            if (o == current.data) {
+            if (Objects.equals(current.data, o)) {
                 return index;
             }
             current = current.next;
             index++;
         }
-        return -1;
+        return INDEX_WHEN_NOTHING_FOUND;
     }
 
     @Override
