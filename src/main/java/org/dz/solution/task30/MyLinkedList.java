@@ -55,6 +55,21 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public boolean remove(Object o) {
+        Node<E> previous = null;
+        Node<E> current = first;
+        while (current != null) {
+            if (Objects.equals(current.data, o)) {
+                if (current == first) {
+                    first = current.next;
+                } else {
+                    previous.next = current.next;
+                }
+                size--;
+                return true;
+            }
+            previous = current;
+            current = current.next;
+        }
         return false;
     }
 
@@ -123,6 +138,15 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public E remove(int index) {
+            if(index < 0 || index >= size){
+                throw new IndexOutOfBoundsException();
+            }
+            E previous = null;
+            Node<E> current = first;
+            if (index == 0){
+                previous = current.data;
+                current = current.next;
+            }
         return null;
     }
 
@@ -142,8 +166,16 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public int lastIndexOf(Object o) {
-        //TODO Реализовать последним
-        return 0;
+        int index = size;
+        Node<E> current = first;
+        while (current != null) {
+            if (Objects.equals(current.data, o)) {
+                return index;
+            }
+            current = current.next;
+            index--;
+        }
+        return INDEX_WHEN_NOTHING_FOUND;
     }
 
     @Override
