@@ -1,13 +1,13 @@
 package org.dz.solution.task29;
 
+import org.dz.solution.helper.MyAbstractList;
+
 import java.util.*;
 import java.util.function.UnaryOperator;
 
-public class MyArrayList<E> implements List<E> {
-    private static final int INDEX_WHEN_NOTHING_FOUND = -1;
+public class MyArrayList<E> extends MyAbstractList<E> implements List<E> {
     private final int DEFAULT_ARRAY_CAPACITY = 3;
     private Object[] array;
-    private int size;
 
     public MyArrayList() {
         array = new Object[DEFAULT_ARRAY_CAPACITY];
@@ -15,21 +15,6 @@ public class MyArrayList<E> implements List<E> {
 
     public MyArrayList(int arrayCapacity) {
         array = new Object[arrayCapacity];
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return indexOf(o) != -1;
     }
 
     @Override
@@ -93,6 +78,10 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
+        //TODO написать метод
+        for (int i = 0; i < size; i++) {
+            contains(true);
+        }
         return false;
     }
 
@@ -120,12 +109,10 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public void replaceAll(UnaryOperator<E> operator) {
-        List.super.replaceAll(operator);
     }
 
     @Override
     public void sort(Comparator<? super E> c) {
-        List.super.sort(c);
     }
 
     @Override
@@ -195,19 +182,14 @@ public class MyArrayList<E> implements List<E> {
         int arraySize = toIndex - fromIndex;
         MyArrayList<E> list = new MyArrayList<>(arraySize);
         for (int i = fromIndex; i < toIndex; i++) {
-            // list.add(i);
+            //list.add(arraySize[fromIndex]);
         }
         return (List<E>) list;
     }
 
     @Override
     public Spliterator<E> spliterator() {
-        return List.super.spliterator();
+        return null;
     }
 
-    private void validateIndex(int index) {
-        if (index >= size || index < 0) {
-            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds 0 - " + size);
-        }
-    }
 }

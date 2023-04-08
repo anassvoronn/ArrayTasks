@@ -558,11 +558,4 @@ public class MyLinkedListTest {
 
         Assert.assertEquals(0, list.size());
     }
-
-    @Test
-    public void test() {
-        Object list = new Object();
-        list = null;
-
-    }
 }

@@ -1,26 +1,11 @@
 package org.dz.solution.task30;
 
+import org.dz.solution.helper.MyAbstractList;
+
 import java.util.*;
 
-public class MyLinkedList<E> implements List<E> {
-    private static final int INDEX_WHEN_NOTHING_FOUND = -1;
+public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
     private Node<E> first;
-    private int size;
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return indexOf(o) != -1;
-    }
 
     @Override
     public Iterator<E> iterator() {
@@ -113,10 +98,7 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public E get(int index) {
-        if (index > size || index < 0) {
-            throw new IndexOutOfBoundsException("Points to a non-existent index = " + index +
-                    " when size = " + size);
-        }
+        validateIndex(index);
         Node<E> current = first;
         int currentIndex = 0;
         while (currentIndex < index) {
@@ -138,16 +120,25 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public E remove(int index) {
-            if(index < 0 || index >= size){
-                throw new IndexOutOfBoundsException();
+        validateIndex(index);
+        Node<E> previous = null;
+        Node<E> current = first;
+        int currentIndex = 0;
+        while (current != null) {
+            if (currentIndex == index) {
+                if (previous == null) {
+                    first = current.next;
+                } else {
+                    previous.next = current.next;
+                }
+                size--;
+                return current.data;
             }
-            E previous = null;
-            Node<E> current = first;
-            if (index == 0){
-                previous = current.data;
-                current = current.next;
-            }
-        return null;
+            previous = current;
+            current = current.next;
+            currentIndex++;
+        }
+        throw new IllegalStateException("Reached unreachable point with index = " + index + " size = " + size);
     }
 
     @Override
