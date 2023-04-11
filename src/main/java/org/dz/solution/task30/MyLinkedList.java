@@ -110,6 +110,20 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
+        Node<E> previous = null;
+        Node<E> current = first;
+        int currentIndex = 0;
+        E oldValue;
+        while (current != null) {
+            if (currentIndex == index) {
+                 oldValue = current.data;
+                 current.data = element;
+                 return oldValue;
+            }
+            previous = current;
+            current = current.next;
+            currentIndex++;
+        }
         return null;
     }
 
