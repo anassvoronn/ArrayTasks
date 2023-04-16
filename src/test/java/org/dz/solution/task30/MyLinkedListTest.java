@@ -562,11 +562,11 @@ public class MyLinkedListTest {
     @Test
     public void add_5MoreElements() {
         List<Integer> list = new MyLinkedList<>();
-        list.add(0,5);
-        list.add(1,0);
-        list.add(2,-10);
-        list.add(3,25);
-        list.add(4,84);
+        list.add(0, 5);
+        list.add(1, 0);
+        list.add(2, -10);
+        list.add(3, 25);
+        list.add(4, 84);
         Assert.assertEquals(5, list.size());
         Assert.assertEquals(Integer.valueOf(5), list.get(0));
         Assert.assertEquals(Integer.valueOf(0), list.get(1));

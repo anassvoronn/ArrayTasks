@@ -110,9 +110,9 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
         E oldValue;
         while (current != null) {
             if (currentIndex == index) {
-                 oldValue = current.data;
-                 current.data = element;
-                 return oldValue;
+                oldValue = current.data;
+                current.data = element;
+                return oldValue;
             }
             previous = current;
             current = current.next;
@@ -125,13 +125,13 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
     public void add(int index, E element) {
         validateIndex(index);
         Node<E> node = new Node<>(element, null);
-        if (first == null){
+        if (first == null) {
             first = node;
         }
         Node<E> current = first;
         int currentIndex = 0;
-        while (current.next != null){
-            if (currentIndex == index){
+        while (current.next != null) {
+            if (currentIndex == index) {
                 current.data = element;
             }
             current = current.next;
