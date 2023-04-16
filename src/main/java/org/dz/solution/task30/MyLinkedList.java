@@ -85,15 +85,8 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
 
     @Override
     public void clear() {
-        Node<E> current = first;
-        while (current != null) {
-            Node<E> next = current.next;
-            current.data = null;
-            current.next = null;
-            current = next;
-            size--;
-        }
         first = null;
+        size = 0;
     }
 
     @Override
@@ -110,6 +103,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
+        validateIndex(index);
         Node<E> previous = null;
         Node<E> current = first;
         int currentIndex = 0;
@@ -124,12 +118,27 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
             current = current.next;
             currentIndex++;
         }
-        return null;
+        throw new IllegalStateException("Reached unreachable point with index = " + index + " size = " + size);
     }
 
     @Override
     public void add(int index, E element) {
-
+        validateIndex(index);
+        Node<E> node = new Node<>(element, null);
+        if (first == null){
+            first = node;
+        }
+        Node<E> current = first;
+        int currentIndex = 0;
+        while (current.next != null){
+            if (currentIndex == index){
+                current.data = element;
+            }
+            current = current.next;
+            currentIndex++;
+            size++;
+        }
+        current.next = node;
     }
 
     @Override

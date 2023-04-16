@@ -558,4 +558,22 @@ public class MyLinkedListTest {
 
         Assert.assertEquals(0, list.size());
     }
+
+    @Test
+    public void add_5MoreElements() {
+        List<Integer> list = new MyLinkedList<>();
+        list.add(0,5);
+        list.add(1,0);
+        list.add(2,-10);
+        list.add(3,25);
+        list.add(4,84);
+        Assert.assertEquals(5, list.size());
+        Assert.assertEquals(Integer.valueOf(5), list.get(0));
+        Assert.assertEquals(Integer.valueOf(0), list.get(1));
+        Assert.assertEquals(Integer.valueOf(-10), list.get(2));
+        Assert.assertEquals(Integer.valueOf(25), list.get(3));
+        Assert.assertEquals(Integer.valueOf(84), list.get(4));
+        Assert.assertFalse(list.isEmpty());
+
+    }
 }
