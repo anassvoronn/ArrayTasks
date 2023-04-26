@@ -3,6 +3,7 @@ package org.dz.solution.task30;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class MyLinkedListTest {
@@ -560,7 +561,91 @@ public class MyLinkedListTest {
     }
 
     @Test
-    public void add_5MoreElements() {
+    public void add_10MoreElements() {
+        List<Integer> list = new MyLinkedList<>();
+        list.add(5);
+        list.add(0);
+        list.add(-10);
+        list.add(25);
+        list.add(84);
+        list.add(0, 5);
+        list.add(1, 0);
+        list.add(2, -10);
+        list.add(3, 25);
+        list.add(4, 84);
+        Assert.assertEquals(10, list.size());
+        Assert.assertEquals(Integer.valueOf(5), list.get(0));
+        Assert.assertEquals(Integer.valueOf(0), list.get(1));
+        Assert.assertEquals(Integer.valueOf(-10), list.get(2));
+        Assert.assertEquals(Integer.valueOf(25), list.get(3));
+        Assert.assertEquals(Integer.valueOf(84), list.get(4));
+        Assert.assertEquals(Integer.valueOf(5), list.get(5));
+        Assert.assertEquals(Integer.valueOf(0), list.get(6));
+        Assert.assertEquals(Integer.valueOf(-10), list.get(7));
+        Assert.assertEquals(Integer.valueOf(25), list.get(8));
+        Assert.assertEquals(Integer.valueOf(84), list.get(9));
+        Assert.assertFalse(list.isEmpty());
+
+    }
+
+    @Test
+    public void add_10MoreElementsToTheSameIndex() {
+        List<Integer> list = new MyLinkedList<>();
+        list.add(5);
+        list.add(0);
+        list.add(-10);
+        list.add(25);
+        list.add(84);
+        list.add(3, 5);
+        list.add(3, 0);
+        list.add(3, -10);
+        list.add(3, 25);
+        list.add(3, 84);
+        Assert.assertEquals(10, list.size());
+        Assert.assertEquals(Integer.valueOf(5), list.get(0));
+        Assert.assertEquals(Integer.valueOf(0), list.get(1));
+        Assert.assertEquals(Integer.valueOf(-10), list.get(2));
+        Assert.assertEquals(Integer.valueOf(84), list.get(3));
+        Assert.assertEquals(Integer.valueOf(25), list.get(4));
+        Assert.assertEquals(Integer.valueOf(-10), list.get(5));
+        Assert.assertEquals(Integer.valueOf(0), list.get(6));
+        Assert.assertEquals(Integer.valueOf(5), list.get(7));
+        Assert.assertEquals(Integer.valueOf(25), list.get(8));
+        Assert.assertEquals(Integer.valueOf(84), list.get(9));
+        Assert.assertFalse(list.isEmpty());
+
+    }
+
+    @Test
+    public void add_10MoreElementsToTheLastIndex() {
+        List<Integer> list = new MyLinkedList<>();
+        list.add(5);
+        list.add(0);
+        list.add(-10);
+        list.add(25);
+        list.add(84);
+        list.add(4, 5);
+        list.add(5, 0);
+        list.add(6, -10);
+        list.add(7, 25);
+        list.add(8, 84);
+        Assert.assertEquals(10, list.size());
+        Assert.assertEquals(Integer.valueOf(5), list.get(0));
+        Assert.assertEquals(Integer.valueOf(0), list.get(1));
+        Assert.assertEquals(Integer.valueOf(-10), list.get(2));
+        Assert.assertEquals(Integer.valueOf(25), list.get(3));
+        Assert.assertEquals(Integer.valueOf(5), list.get(4));
+        Assert.assertEquals(Integer.valueOf(0), list.get(5));
+        Assert.assertEquals(Integer.valueOf(-10), list.get(6));
+        Assert.assertEquals(Integer.valueOf(25), list.get(7));
+        Assert.assertEquals(Integer.valueOf(84), list.get(8));
+        Assert.assertEquals(Integer.valueOf(84), list.get(9));
+        Assert.assertFalse(list.isEmpty());
+
+    }
+
+    @Test
+    public void add_5MoreElementsToTheEmptyList() {
         List<Integer> list = new MyLinkedList<>();
         list.add(0, 5);
         list.add(1, 0);

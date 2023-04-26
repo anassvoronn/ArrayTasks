@@ -129,15 +129,19 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
             first = node;
         }
         Node<E> current = first;
+        Node<E> prev = null;
         int currentIndex = 0;
         while (current.next != null) {
             if (currentIndex == index) {
-                current.data = element;
+                prev.next = node;
+                node.next = current;
+                break;
             }
+            prev = current;
             current = current.next;
             currentIndex++;
-            size++;
         }
+        size++;
         current.next = node;
     }
 
