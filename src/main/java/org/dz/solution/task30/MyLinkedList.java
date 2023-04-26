@@ -123,11 +123,20 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
+        if (index == size) {
+            add(element);
+            return;
+        }
         validateIndex(index);
+
         Node<E> node = new Node<>(element, null);
+        size++;
+
         if (first == null) {
             first = node;
+            return;
         }
+
         Node<E> current = first;
         Node<E> prev = null;
         int currentIndex = 0;
@@ -211,6 +220,20 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
         return null;
     }
 
+    @Override
+    public String toString() {
+        Node<E> current = first;
+        StringBuilder str = new StringBuilder();
+        while (current != null) {
+            str.append(current);
+            if (current.next != null) {
+                str.append(", ");
+            }
+            current = current.next;
+        }
+        return str.toString();
+    }
+
     private static class Node<E> {
         private E data;
         private Node<E> next;
@@ -218,6 +241,11 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
         private Node(E data, Node<E> next) {
             this.data = data;
             this.next = next;
+        }
+
+        @Override
+        public String toString() {
+            return data.toString();
         }
     }
 }

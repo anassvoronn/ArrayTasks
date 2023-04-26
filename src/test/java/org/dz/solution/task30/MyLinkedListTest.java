@@ -3,7 +3,6 @@ package org.dz.solution.task30;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class MyLinkedListTest {
@@ -613,7 +612,50 @@ public class MyLinkedListTest {
         Assert.assertEquals(Integer.valueOf(25), list.get(8));
         Assert.assertEquals(Integer.valueOf(84), list.get(9));
         Assert.assertFalse(list.isEmpty());
+    }
 
+    @Test
+    public void add_1MoreElementsToThe0Index() {
+        List<Integer> list = new MyLinkedList<>();
+        list.add(5);
+        list.add(0, -10);
+        Assert.assertEquals(2, list.size());
+        Assert.assertEquals(Integer.valueOf(-10), list.get(0));
+        Assert.assertEquals(Integer.valueOf(5), list.get(1));
+        Assert.assertFalse(list.isEmpty());
+    }
+
+    @Test
+    public void add_1ElementToTheEmpty() {
+        List<Integer> list = new MyLinkedList<>();
+        list.add(0, -10);
+        Assert.assertEquals(1, list.size());
+        Assert.assertEquals(Integer.valueOf(-10), list.get(0));
+        Assert.assertFalse(list.isEmpty());
+    }
+
+    @Test
+    public void add_2ElementToTheEmpty() {
+        List<Integer> list = new MyLinkedList<>();
+        list.add(0, -10);
+        list.add(1, 5);
+        Assert.assertEquals(2, list.size());
+        Assert.assertEquals(Integer.valueOf(-10), list.get(0));
+        Assert.assertEquals(Integer.valueOf(5), list.get(1));
+        Assert.assertFalse(list.isEmpty());
+    }
+
+    @Test
+    public void add_3ElementToTheEmpty() {
+        List<Integer> list = new MyLinkedList<>();
+        list.add(0, -10);
+        list.add(1, 5);
+        list.add(2, 6);
+        Assert.assertEquals(3, list.size());
+        Assert.assertEquals(Integer.valueOf(-10), list.get(0));
+        Assert.assertEquals(Integer.valueOf(5), list.get(1));
+        Assert.assertEquals(Integer.valueOf(6), list.get(2));
+        Assert.assertFalse(list.isEmpty());
     }
 
     @Test
