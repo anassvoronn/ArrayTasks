@@ -461,7 +461,7 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void lastIndexOf_indexOutOfBoundsException() {
+    public void lastIndexOf_whenThereAre1Matches() {
         List<Integer> list = new MyArrayList<>();
 
         list.add(13);
@@ -472,6 +472,21 @@ public class MyArrayListTest {
 
         Assert.assertEquals(3, list.size());
         Assert.assertEquals(3, getCapacity(list));
+    }
+
+    @Test
+    public void lastIndexOf_whenThereAre2Matches() {
+        List<Integer> list = new MyArrayList<>();
+
+        list.add(13);
+        list.add(-5);
+        list.add(200);
+        list.add(200);
+
+        Assert.assertEquals(3, list.lastIndexOf(200));
+
+        Assert.assertEquals(4, list.size());
+        Assert.assertEquals(6, getCapacity(list));
     }
 
     @Test

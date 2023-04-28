@@ -150,7 +150,6 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
             current = current.next;
             currentIndex++;
         }
-        size++;
         current.next = node;
     }
 
@@ -193,14 +192,14 @@ public class MyLinkedList<E> extends MyAbstractList<E> implements List<E> {
 
     @Override
     public int lastIndexOf(Object o) {
-        int index = size;
+        int index = 0;
         Node<E> current = first;
         while (current != null) {
             if (Objects.equals(current.data, o)) {
                 return index;
             }
             current = current.next;
-            index--;
+            index++;
         }
         return INDEX_WHEN_NOTHING_FOUND;
     }
