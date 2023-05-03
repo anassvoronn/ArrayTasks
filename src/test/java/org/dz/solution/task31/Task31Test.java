@@ -4,13 +4,15 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Task31Test {
 
     public static final String WORD_DELIMITER = " ";
 
     @Test
-    public void writeReadStringMatrixFile() throws FileNotFoundException {
+    public void writeReadStringMatrixFile() throws IOException {
         String[][] expectedMatrix = {
                 {"7", "Ок", "Коля", "13", "утка", "45"},
                 {"Phone", "2,5", "string", "@", null, null},
@@ -18,15 +20,19 @@ public class Task31Test {
                 {"%", "81", "Задание", "cat", "слово", null}
         };
         String filePath = "src/main/resources/org/dz/solution/task31/StringMatrix";
+        Files.delete(Path.of("src/main/resources/org/dz/solution/task31/StringMatrix"));
         //1. создать новый файл StringMatrix
         //2. записать expectedMatrix в StringMatrix файл разделяя каждое слово пробелом
         //3. методы не менять
         // можно использовать PrintWriter класс
-        String filePathTwo = "src/main/resources/org/dz/solution/task31/EmptyStringMatrix";
+        String filePathTwo = "src/main/resources/org/dz/solution/task31/StringMatrix";
         PrintWriter pw = new PrintWriter(filePathTwo);
 
         for (int i = 0; i < expectedMatrix.length; i++) {
             for (int j = 0; j < expectedMatrix[i].length; j++) {
+                if (expectedMatrix[i][j] == null) {
+                    break;
+                }
                 pw.print(expectedMatrix[i][j] + " ");
             }
             pw.println();
