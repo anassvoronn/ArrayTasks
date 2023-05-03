@@ -3,25 +3,37 @@ package org.dz.solution.task31;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Task31Test {
 
     public static final String WORD_DELIMITER = " ";
 
     @Test
-    public void readStringMatrixFile() {
-        String filePath = "src/main/resources/org/dz/solution/task31/StringMatrix";
-        String[][] matrix = createMatrixFromFile(filePath);
-        fillInTheMatrix(filePath, matrix);
-        Assert.assertEquals(new String[][]{
+    public void writeReadStringMatrixFile() throws FileNotFoundException {
+        String[][] expectedMatrix = {
                 {"7", "Ок", "Коля", "13", "утка", "45"},
                 {"Phone", "2,5", "string", "@", null, null},
                 {"собака", null, null, null, null, null},
                 {"%", "81", "Задание", "cat", "слово", null}
-        }, matrix);
+        };
+        String filePath = "src/main/resources/org/dz/solution/task31/StringMatrix";
+        //1. создать новый файл StringMatrix
+        //2. записать expectedMatrix в StringMatrix файл разделяя каждое слово пробелом
+        //3. методы не менять
+        // можно использовать PrintWriter класс
+        String filePathTwo = "src/main/resources/org/dz/solution/task31/EmptyStringMatrix";
+        PrintWriter pw = new PrintWriter(filePathTwo);
+
+        for (int i = 0; i < expectedMatrix.length; i++) {
+            for (int j = 0; j < expectedMatrix[i].length; j++) {
+                pw.printf(filePathTwo);
+            }
+            pw.println();
+        }
+        String[][] actualMatrix = createMatrixFromFile(filePath);
+        fillInTheMatrix(filePath, actualMatrix);
+        Assert.assertEquals(expectedMatrix, actualMatrix);
     }
 
     private String[][] createMatrixFromFile(String filePath) {
