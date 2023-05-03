@@ -21,23 +21,20 @@ public class Task31Test {
         };
         String filePath = "src/main/resources/org/dz/solution/task31/StringMatrix";
         Files.delete(Path.of("src/main/resources/org/dz/solution/task31/StringMatrix"));
-        //1. создать новый файл StringMatrix
-        //2. записать expectedMatrix в StringMatrix файл разделяя каждое слово пробелом
-        //3. методы не менять
-        // можно использовать PrintWriter класс
+
         String filePathTwo = "src/main/resources/org/dz/solution/task31/StringMatrix";
         PrintWriter pw = new PrintWriter(filePathTwo);
-
-        for (int i = 0; i < expectedMatrix.length; i++) {
-            for (int j = 0; j < expectedMatrix[i].length; j++) {
-                if (expectedMatrix[i][j] == null) {
+        for (String[] matrix : expectedMatrix) {
+            for (String s : matrix) {
+                if (s == null) {
                     break;
                 }
-                pw.print(expectedMatrix[i][j] + " ");
+                pw.print(s + " ");
             }
             pw.println();
         }
         pw.close();
+
         String[][] actualMatrix = createMatrixFromFile(filePath);
         fillInTheMatrix(filePath, actualMatrix);
         Assert.assertEquals(expectedMatrix, actualMatrix);
