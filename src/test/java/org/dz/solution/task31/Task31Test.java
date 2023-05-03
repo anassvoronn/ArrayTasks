@@ -27,10 +27,11 @@ public class Task31Test {
 
         for (int i = 0; i < expectedMatrix.length; i++) {
             for (int j = 0; j < expectedMatrix[i].length; j++) {
-                pw.printf(filePathTwo);
+                pw.print(expectedMatrix[i][j] + " ");
             }
             pw.println();
         }
+        pw.close();
         String[][] actualMatrix = createMatrixFromFile(filePath);
         fillInTheMatrix(filePath, actualMatrix);
         Assert.assertEquals(expectedMatrix, actualMatrix);
