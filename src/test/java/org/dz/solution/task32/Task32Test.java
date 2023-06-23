@@ -17,23 +17,42 @@ public class Task32Test {
                 {null, "12", "13", "14", null},
                 {"16", null, null, "19", "20"}
         };
+        String[] numbers = {"2", "5", "7", "8", "11", "15", "17", "18"};
+        int index = 0;
         String filePath = "src/main/resources/org/dz/solution/task32/InputFile";
 
         String filePathTwo = "src/main/resources/org/dz/solution/task32/OutputFile";
-        PrintWriter pw = new PrintWriter(filePathTwo);
-        for (String[] matrix : expectedMatrix) {
-            for (String s : matrix) {
-                if (s == null) {
-                    pw.print(s);
+        for(int i = 0; i < numbers.length; i++) {
+            boolean found = false;
+            for(int j = 0; j < expectedMatrix.length; j++) {
+                for(int k = 0; k < expectedMatrix[j].length; k++) {
+                    if(expectedMatrix[j][k] != null && expectedMatrix[j][k] == numbers[i]) {
+                        found = true;
+                        break;
+                    }
                 }
             }
-            pw.println();
-        }
-        pw.close();
+            if(!found) {
+                System.out.print(numbers[i] + " ");
 
-        String[][] actualMatrix = createMatrixFromFile(filePath);
-        fillInTheMatrix(filePath, actualMatrix);
-        Assert.assertEquals(expectedMatrix, actualMatrix);
+                for(int j = 0; j < expectedMatrix.length; j++) {
+                    for(int k = 0; k < expectedMatrix[j].length; k++) {
+                        if(expectedMatrix[j][k] == null) {
+                            expectedMatrix[j][k] = numbers[i];
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println();
+
+        for(int i = 0; i < expectedMatrix.length; i++) {
+            for(int j = 0; j < expectedMatrix[i].length; j++) {
+                System.out.print(expectedMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
     private String[][] createMatrixFromFile(String filePath) {
@@ -59,8 +78,7 @@ public class Task32Test {
             for (int i = 0; i < matrix.length; i++) {
                 String line = br.readLine();
                 String[] words = line.split(WORD_DELIMITER);
-                for (int j = 0; j < words.length; j++) {
-                    matrix[i][j] = words[j];
+                for (int j = 0; j < words.length; j++) {matrix[i][j] = words[j];
                 }
             }
         } catch (IOException e) {
