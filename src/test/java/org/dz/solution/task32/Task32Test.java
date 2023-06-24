@@ -11,47 +11,24 @@ public class Task32Test {
 
     @Test
     public void test() throws IOException {
-        String[][] expectedMatrix = {
-                {"1", null, "3", "4", null},
-                {"6", null, null, "9", "10"},
-                {null, "12", "13", "14", null},
-                {"16", null, null, "19", "20"}
-        };
-        String[] numbers = {"2", "5", "7", "8", "11", "15", "17", "18"};
-        int index = 0;
+        int[] array = {1, 3, 4, 6, 9, 10, 12, 13, 14, 16, 19, 20};
         String filePath = "src/main/resources/org/dz/solution/task32/InputFile";
 
         String filePathTwo = "src/main/resources/org/dz/solution/task32/OutputFile";
-        for(int i = 0; i < numbers.length; i++) {
-            boolean found = false;
-            for(int j = 0; j < expectedMatrix.length; j++) {
-                for(int k = 0; k < expectedMatrix[j].length; k++) {
-                    if(expectedMatrix[j][k] != null && expectedMatrix[j][k] == numbers[i]) {
-                        found = true;
-                        break;
-                    }
+        int min = array[0];
+        int max = array[array.length - 1];
+
+        for (int i = min; i <= max; i++) {
+            boolean foundNumber = false;
+            for (int j = 0; j < array.length; j++) {
+                if (array[j] == i) {
+                    foundNumber = true;
+                    break;
                 }
             }
-            if(!found) {
-                System.out.print(numbers[i] + " ");
-
-                for(int j = 0; j < expectedMatrix.length; j++) {
-                    for(int k = 0; k < expectedMatrix[j].length; k++) {
-                        if(expectedMatrix[j][k] == null) {
-                            expectedMatrix[j][k] = numbers[i];
-                            break;
-                        }
-                    }
-                }
+            if (!foundNumber) {
+                System.out.print(i + " ");
             }
-        }
-        System.out.println();
-
-        for(int i = 0; i < expectedMatrix.length; i++) {
-            for(int j = 0; j < expectedMatrix[i].length; j++) {
-                System.out.print(expectedMatrix[i][j] + " ");
-            }
-            System.out.println();
         }
     }
 
@@ -78,7 +55,8 @@ public class Task32Test {
             for (int i = 0; i < matrix.length; i++) {
                 String line = br.readLine();
                 String[] words = line.split(WORD_DELIMITER);
-                for (int j = 0; j < words.length; j++) {matrix[i][j] = words[j];
+                for (int j = 0; j < words.length; j++) {
+                    matrix[i][j] = words[j];
                 }
             }
         } catch (IOException e) {
