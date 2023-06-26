@@ -8,28 +8,18 @@ import java.nio.file.Path;
 import java.util.Arrays;
 
 public class Task32Test {
+    int[] array;
 
     @Test
     public void test() throws IOException {
-        int[] array;
         String filePath = "src/main/resources/org/dz/solution/task32/InputFile";
         String filePath2 = "src/main/resources/org/dz/solution/task32/OutputFile";
         Files.delete(Path.of("src/main/resources/org/dz/solution/task32/OutputFile"));
 
         PrintWriter pw = new PrintWriter(filePath2);
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line = br.readLine();
-            String[] elements = line.split(" ");
-            array = new int[elements.length];
-            for (int i = 0; i < elements.length; i++) {
-                array[i] = Integer.parseInt(elements[i]);
-            }
-            br.close();
-            pw.print(Arrays.toString(findTheMissingNumbers(array)));
-
-        } catch (IOException e) {
-            throw new RuntimeException("Array creation failed", e);
-        }
+        readingAFile(filePath);
+        pw.print(Arrays.toString(findTheMissingNumbers(array)));
+        pw.close();
     }
 
     private int[] findTheMissingNumbers(int[] array){
@@ -51,7 +41,21 @@ public class Task32Test {
                 System.out.print(i + " ");
             }
         }
+        newArray = new int[index];
         return newArray;
+    }
+
+    private void readingAFile(String filePath){
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line = br.readLine();
+            String[] elements = line.split(" ");
+            array = new int[elements.length];
+            for (int i = 0; i < elements.length; i++) {
+                array[i] = Integer.parseInt(elements[i]);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Array creation failed", e);
+        }
     }
 
 }
