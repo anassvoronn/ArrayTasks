@@ -12,20 +12,20 @@ public class Task32Test {
 
     @Test
     public void test() throws IOException {
-        String filePath = "src/main/resources/org/dz/solution/task32/InputFile";
-        String filePath2 = "src/main/resources/org/dz/solution/task32/OutputFile";
+        String sourceDataFile = "src/main/resources/org/dz/solution/task32/InputFile";
+        String resultFile = "src/main/resources/org/dz/solution/task32/OutputFile";
         Files.delete(Path.of("src/main/resources/org/dz/solution/task32/OutputFile"));
 
-        PrintWriter pw = new PrintWriter(filePath2);
-        readingAFile(filePath);
+        PrintWriter pw = new PrintWriter(resultFile);
+        readingAFile(sourceDataFile);
         pw.print(Arrays.toString(findTheMissingNumbers(array)));
         pw.close();
     }
 
-    private int[] findTheMissingNumbers(int[] array){
+    private int[] findTheMissingNumbers(int[] array) {
         int min = array[0];
         int max = array[array.length - 1];
-        int[] newArray = new int[max - min + 1];
+        int[] newArray = new int[array.length];
         int index = 0;
         for (int i = min; i <= max; i++) {
             boolean foundNumber = false;
@@ -41,11 +41,10 @@ public class Task32Test {
                 System.out.print(i + " ");
             }
         }
-        newArray = new int[index];
         return newArray;
     }
 
-    private void readingAFile(String filePath){
+    private void readingAFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = br.readLine();
             String[] elements = line.split(" ");
