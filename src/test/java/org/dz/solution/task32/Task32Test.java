@@ -57,7 +57,7 @@ public class Task32Test {
                     newArray[index] = i;
                     index++;
                     System.out.print(i + " ");
-                    pw.print(i);
+                    pw.print(i + " ");
                 }
             }
         } catch (IOException e) {
