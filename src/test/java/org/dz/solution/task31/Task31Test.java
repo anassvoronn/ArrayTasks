@@ -23,21 +23,27 @@ public class Task31Test {
         Files.delete(Path.of("src/main/resources/org/dz/solution/task31/StringMatrix"));
 
         String filePathTwo = "src/main/resources/org/dz/solution/task31/StringMatrix";
-        PrintWriter pw = new PrintWriter(filePathTwo);
-        for (String[] matrix : expectedMatrix) {
-            for (String s : matrix) {
-                if (s == null) {
-                    break;
-                }
-                pw.print(s + " ");
-            }
-            pw.println();
-        }
-        pw.close();
 
+        printMatrix(expectedMatrix, filePathTwo);
         String[][] actualMatrix = createMatrixFromFile(filePath);
         fillInTheMatrix(filePath, actualMatrix);
         Assert.assertEquals(expectedMatrix, actualMatrix);
+    }
+
+    private void printMatrix(String[][] expectedMatrix, String filePathTwo) {
+        try (PrintWriter pw = new PrintWriter(filePathTwo)) {
+            for (String[] matrix : expectedMatrix) {
+                for (String s : matrix) {
+                    if (s == null) {
+                        break;
+                    }
+                    pw.print(s + " ");
+                }
+                pw.println();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("");
+        }
     }
 
     private String[][] createMatrixFromFile(String filePath) {

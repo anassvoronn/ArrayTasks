@@ -22,7 +22,7 @@ public class Task32Test {
         findTheMissingNumbers(array, resultFile);
     }
 
-    private String[] findTheNumberOfNumbersInAFile(String sourceDataFile) {
+    private int findTheNumberOfNumbersInAFile(String sourceDataFile) {
         int count = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(sourceDataFile))) {
             String line = br.readLine();
@@ -36,7 +36,7 @@ public class Task32Test {
         } catch (IOException e) {
             throw new RuntimeException("Array creation failed", e);
         }
-        return new String[count];
+        return count;
     }
 
     private int[] findTheMissingNumbers(int[] array, String resultFile) {
