@@ -12,14 +12,13 @@ public class Task32Test {
 
     @Test
     public void test() throws IOException {
-        int[] array = {1, 3, 4, 6, 9, 10, 12, 13, 14, 16, 19, 20};
         String sourceDataFile = "src/main/resources/org/dz/solution/task32/InputFile";
         String resultFile = "src/main/resources/org/dz/solution/task32/OutputFile";
         Files.deleteIfExists(Path.of("src/main/resources/org/dz/solution/task32/OutputFile"));
 
         findTheNumberOfNumbersInAFile(sourceDataFile);
         readingAFile(sourceDataFile);
-        findTheMissingNumbers(array, resultFile);
+        findTheMissingNumbers(sourceDataFile, resultFile);
     }
 
     private int findTheNumberOfNumbersInAFile(String sourceDataFile) {
@@ -39,7 +38,9 @@ public class Task32Test {
         return count;
     }
 
-    private int[] findTheMissingNumbers(int[] array, String resultFile) {
+    private int[] findTheMissingNumbers(String sourceDataFile, String resultFile) {
+        int count = findTheNumberOfNumbersInAFile(sourceDataFile);
+        int[] array = new int[count];
         int min = array[0];
         int max = array[array.length - 1];
         int[] newArray = new int[array.length];
@@ -67,7 +68,6 @@ public class Task32Test {
     }
 
     private void readingAFile(String sourceDataFile) {
-        findTheNumberOfNumbersInAFile(sourceDataFile);
         try (BufferedReader br = new BufferedReader(new FileReader(sourceDataFile))) {
             String line = br.readLine();
             String[] elements = line.split(" ");
