@@ -14,11 +14,7 @@ public class Task32Test {
     public void test() throws IOException {
         String sourceDataFile = "src/main/resources/org/dz/solution/task32/InputFile";
         String resultFile = "src/main/resources/org/dz/solution/task32/OutputFile";
-        Files.deleteIfExists(Path.of("src/main/resources/org/dz/solution/task32/OutputFile"));
-
-        findTheNumberOfNumbersInAFile(sourceDataFile);
-        readingAFile(sourceDataFile);
-        findTheMissingNumbers(sourceDataFile, resultFile);
+        Files.deleteIfExists(Path.of(resultFile));
     }
 
     private int findTheNumberOfNumbersInAFile(String sourceDataFile) {
@@ -38,36 +34,7 @@ public class Task32Test {
         return count;
     }
 
-    private int[] findTheMissingNumbers(String sourceDataFile, String resultFile) {
-        int count = findTheNumberOfNumbersInAFile(sourceDataFile);
-        int[] array = new int[count];
-        int min = array[0];
-        int max = array[array.length - 1];
-        int[] newArray = new int[array.length];
-        int index = 0;
-        try (PrintWriter pw = new PrintWriter(resultFile)) {
-            for (int i = min; i <= max; i++) {
-                boolean foundNumber = false;
-                for (int j = 0; j < array.length; j++) {
-                    if (array[j] == i) {
-                        foundNumber = true;
-                        break;
-                    }
-                }
-                if (!foundNumber) {
-                    newArray[index] = i;
-                    index++;
-                    System.out.print(i + " ");
-                    pw.print(i + " ");
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Array creation failed", e);
-        }
-        return newArray;
-    }
-
-    private void readingAFile(String sourceDataFile) {
+    private int[] readingAFile(String sourceDataFile) {
         try (BufferedReader br = new BufferedReader(new FileReader(sourceDataFile))) {
             String line = br.readLine();
             String[] elements = line.split(" ");
@@ -78,6 +45,7 @@ public class Task32Test {
         } catch (IOException e) {
             throw new RuntimeException("Array creation failed", e);
         }
+        return
     }
 
 }
