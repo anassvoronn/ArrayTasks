@@ -1,5 +1,6 @@
 package org.dz.solution.task32;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
@@ -9,20 +10,44 @@ import java.nio.file.Path;
 public class Task32Test {
 
     private static final String WORD_DELIMITER = " ";
+    private static final String SOURCE_DATA_FILE = "src/main/resources/org/dz/solution/task32/InputFile";
+    private static final String RESULT_FILE = "src/main/resources/org/dz/solution/task32/OutputFile";
+
+    @Before
+    public void setUp() throws Exception {
+        Files.deleteIfExists(Path.of(SOURCE_DATA_FILE));
+        Files.deleteIfExists(Path.of(RESULT_FILE));
+    }
 
     @Test
-    public void test() throws IOException {
-        String sourceDataFile = "src/main/resources/org/dz/solution/task32/InputFile";
-        String resultFile = "src/main/resources/org/dz/solution/task32/OutputFile";
-        Files.deleteIfExists(Path.of(resultFile));
-        //Посчитать количество чисел в файле. Сохранить в переменную countNumbers.
-        //Записать числа в массив. Сохранить в переменную ссылающуюся на массив numbersFromFile.
-        //Найти недостающие числа в numbersFromFile. записать в skippedNumbers недостающие числа.
-        //записать skippedNumbers в файл.
-        int countNumbers = findTheNumberOfNumbersInAFile(sourceDataFile);
-        int[] numbersFromFile = writeNumbersToArray(countNumbers, sourceDataFile);
+    public void inputFileEmpty() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "");
+        calculateSkippedNumbers();
+    }
+
+    @Test
+    public void case1() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1 3 4 6 9 10 12 13 14 16 19 20");
+        calculateSkippedNumbers();
+    }
+
+    @Test
+    public void case2() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1 3 4 12 13 14 16 19 20");
+        calculateSkippedNumbers();
+    }
+
+    @Test
+    public void case3() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20");
+        calculateSkippedNumbers();
+    }
+
+    private void calculateSkippedNumbers() {
+        int countNumbers = findTheNumberOfNumbersInAFile(SOURCE_DATA_FILE);
+        int[] numbersFromFile = writeNumbersToArray(countNumbers, SOURCE_DATA_FILE);
         int[] skippedNumbers = findTheMissingNumbers(numbersFromFile);
-        writeArrayToFile(skippedNumbers, resultFile);
+        writeArrayToFile(skippedNumbers, RESULT_FILE);
     }
 
     private int findTheNumberOfNumbersInAFile(String sourceDataFile) {
@@ -44,7 +69,7 @@ public class Task32Test {
 
     private int[] writeNumbersToArray(int countNumbers, String sourceDataFile) {
         int[] array = new int[countNumbers];
-        readingAFile(sourceDataFile);
+        array = readingAFile(sourceDataFile);
         return array;
     }
 
@@ -65,7 +90,7 @@ public class Task32Test {
     }
 
     private int[] findTheMissingNumbers(int[] numbersFromFile) {
-        int[] skippedNumbers = new int[numbersFromFile.length];
+        int[] skippedNumbers = new int[20];
         int index = 0;
         int min = numbersFromFile[0];
         int max = numbersFromFile[numbersFromFile.length - 1];
@@ -83,13 +108,17 @@ public class Task32Test {
                 System.out.print(skippedNumbers[index] + " ");
             }
         }
-        return skippedNumbers;
+        int[] newArray = new int[index];
+        for (int i = 0; i < newArray.length; i++) {
+            newArray[i] = skippedNumbers[i];
+        }
+        return newArray;
     }
 
     private void writeArrayToFile(int[] skippedNumbers, String resultFile) {
         try (PrintWriter pw = new PrintWriter(resultFile)) {
             for (int i = 0; i < skippedNumbers.length; i++) {
-                pw.print(skippedNumbers[i] + " ");
+                pw.println(skippedNumbers[i]);
             }
         } catch (IOException e) {
             throw new RuntimeException("Array creation failed", e);
