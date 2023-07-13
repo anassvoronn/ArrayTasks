@@ -64,6 +64,9 @@ public class Task32Test {
         int count = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(sourceDataFile))) {
             String line = br.readLine();
+            if (line == null) {
+                return 0;
+            }
             String[] words = line.split(WORD_DELIMITER);
             for (int i = 0; i < words.length; i++) {
                 if (words.length > count) {
@@ -78,17 +81,14 @@ public class Task32Test {
     }
 
     private int[] writeNumbersToArray(int countNumbers, String sourceDataFile) {
-        int[] array = new int[countNumbers];
-        array = readingAFile(sourceDataFile);
-        return array;
-    }
-
-    private int[] readingAFile(String sourceDataFile) {
         int[] array;
         try (BufferedReader br = new BufferedReader(new FileReader(sourceDataFile))) {
             String line = br.readLine();
+            if (line == null) {
+                return new int[0];
+            }
             String[] elements = line.split(" ");
-            array = new int[elements.length];
+            array = new int[countNumbers];
             for (int i = 0; i < elements.length; i++) {
                 array[i] = Integer.parseInt(elements[i]);
                 System.out.print(array[i] + " ");
@@ -102,6 +102,12 @@ public class Task32Test {
     private int[] findTheMissingNumbers(int[] numbersFromFile) {
         int[] skippedNumbers = new int[20];
         int index = 0;
+        if (numbersFromFile.length == 0) {
+            for (int i = 0; i < skippedNumbers.length; i++) {
+                skippedNumbers[i] = i + 1;
+            }
+            return skippedNumbers;
+        }
         int min = numbersFromFile[0];
         int max = numbersFromFile[numbersFromFile.length - 1];
         for (int i = min; i <= max; i++) {
@@ -128,7 +134,11 @@ public class Task32Test {
     private void writeArrayToFile(int[] skippedNumbers, String resultFile) {
         try (PrintWriter pw = new PrintWriter(resultFile)) {
             for (int i = 0; i < skippedNumbers.length; i++) {
-                pw.println(skippedNumbers[i]);
+                if (i == skippedNumbers.length - 1) {
+                    pw.print(skippedNumbers[i]);
+                    return;
+                }
+                pw.print(skippedNumbers[i] + "\n");
             }
         } catch (IOException e) {
             throw new RuntimeException("Array creation failed", e);
