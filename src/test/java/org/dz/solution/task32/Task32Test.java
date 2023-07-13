@@ -136,8 +136,7 @@ public class Task32Test {
             return skippedNumbers;
         }
         int min = numbersFromFile[0];
-        int max = numbersFromFile[numbersFromFile.length - 1];
-        for (int i = min; i <= max; i++) {
+        for (int i = min; i <= 20; i++) {
             boolean foundNumber = false;
             for (int j = 0; j < numbersFromFile.length; j++) {
                 if (numbersFromFile[j] == i) {
