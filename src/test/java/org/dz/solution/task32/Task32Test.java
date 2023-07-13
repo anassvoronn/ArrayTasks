@@ -3,7 +3,10 @@ package org.dz.solution.task32;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -51,6 +54,30 @@ public class Task32Test {
         calculateSkippedNumbers();
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("", actualResult);
+    }
+
+    @Test
+    public void case4() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1 3 4 6 13 14");
+        calculateSkippedNumbers();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("2\n5\n7\n8\n9\n10\n11\n12\n15\n16\n17\n18\n19\n20", actualResult);
+    }
+
+    @Test
+    public void case5() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1");
+        calculateSkippedNumbers();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20", actualResult);
+    }
+
+    @Test
+    public void case6() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "20");
+        calculateSkippedNumbers();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19", actualResult);
     }
 
     private void calculateSkippedNumbers() {
