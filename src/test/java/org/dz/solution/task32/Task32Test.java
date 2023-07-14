@@ -79,6 +79,14 @@ public class Task32Test {
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19", actualResult);
     }
+    
+    @Test
+    public void case7() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "16 20");
+        calculateSkippedNumbers();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n17\n18\n19", actualResult);
+    }
 
     private void calculateSkippedNumbers() {
         int countNumbers = findTheNumberOfNumbersInAFile(SOURCE_DATA_FILE);
