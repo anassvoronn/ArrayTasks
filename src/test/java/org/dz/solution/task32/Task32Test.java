@@ -143,7 +143,7 @@ public class Task32Test {
             }
             return skippedNumbers;
         }
-        int min = numbersFromFile[0];
+        int min = 1;
         for (int i = min; i <= 20; i++) {
             boolean foundNumber = false;
             for (int j = 0; j < numbersFromFile.length; j++) {
