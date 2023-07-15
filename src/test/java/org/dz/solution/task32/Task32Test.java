@@ -103,14 +103,14 @@ public class Task32Test {
                 return 0;
             }
             String[] words = line.split(WORD_DELIMITER);
-            for (int i = 0; i < words.length; i++) {
+            for (int i = words.length - 1; i >= 0; i--) {
                 if (words.length > count) {
                     count++;
                 }
             }
             System.out.println(count);
         } catch (IOException e) {
-            throw new RuntimeException("Array creation failed", e);
+            throw new RuntimeException("Counting numbers failed", e);
         }
         return count;
     }
@@ -175,7 +175,7 @@ public class Task32Test {
                 pw.print(skippedNumbers[i] + "\n");
             }
         } catch (IOException e) {
-            throw new RuntimeException("Array creation failed", e);
+            throw new RuntimeException("Array write failed", e);
         }
     }
 
