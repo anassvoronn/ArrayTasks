@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -79,7 +80,7 @@ public class Task32Test {
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19", actualResult);
     }
-    
+
     @Test
     public void case7() throws IOException {
         Files.writeString(Path.of(SOURCE_DATA_FILE), "16 20");
@@ -90,8 +91,8 @@ public class Task32Test {
 
     private void calculateSkippedNumbers() {
         int countNumbers = findTheNumberOfNumbersInAFile(SOURCE_DATA_FILE);
-        int[] numbersFromFile = writeNumbersToArray(countNumbers, SOURCE_DATA_FILE);
-        int[] skippedNumbers = findTheMissingNumbers(numbersFromFile);
+        ArrayList<Integer> numbersFromFile = writeNumbersToArray(countNumbers, SOURCE_DATA_FILE);
+        ArrayList<Integer> skippedNumbers = findTheMissingNumbers(numbersFromFile);
         writeArrayToFile(skippedNumbers, RESULT_FILE);
     }
 
@@ -115,18 +116,17 @@ public class Task32Test {
         return count;
     }
 
-    private int[] writeNumbersToArray(int countNumbers, String sourceDataFile) {
-        int[] array;
+    private ArrayList<Integer> writeNumbersToArray(int countNumbers, String sourceDataFile) {
+        ArrayList<Integer> array = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(sourceDataFile))) {
             String line = br.readLine();
             if (line == null) {
-                return new int[0];
+                return new ArrayList<>(0);
             }
             String[] elements = line.split(" ");
-            array = new int[countNumbers];
             for (int i = 0; i < elements.length; i++) {
-                array[i] = Integer.parseInt(elements[i]);
-                System.out.print(array[i] + " ");
+                array.set(i, Integer.parseInt(elements[i]));
+                System.out.print(array.get(i) + " ");
             }
         } catch (IOException e) {
             throw new RuntimeException("Array creation failed", e);
@@ -134,45 +134,45 @@ public class Task32Test {
         return array;
     }
 
-    private int[] findTheMissingNumbers(int[] numbersFromFile) {
-        int[] skippedNumbers = new int[20];
+    private ArrayList<Integer> findTheMissingNumbers(ArrayList<Integer> numbersFromFile) {
+        ArrayList<Integer> skippedNumbers = new ArrayList<>();
         int index = 0;
-        if (numbersFromFile.length == 0) {
-            for (int i = 0; i < skippedNumbers.length; i++) {
-                skippedNumbers[i] = i + 1;
+        if (numbersFromFile == null) {
+            for (int i = 0; i < skippedNumbers.size(); i++) {
+                skippedNumbers.set(i, i + 1);
             }
             return skippedNumbers;
         }
         int min = 1;
         for (int i = min; i <= 20; i++) {
             boolean foundNumber = false;
-            for (int j = 0; j < numbersFromFile.length; j++) {
-                if (numbersFromFile[j] == i) {
+            for (int j = 0; j < numbersFromFile.size(); j++) {
+                if (numbersFromFile.get(j) == i) {
                     foundNumber = true;
                     break;
                 }
             }
             if (!foundNumber) {
-                skippedNumbers[index] = i;
+                skippedNumbers.set(index, i);
                 index++;
-                System.out.print(skippedNumbers[index] + " ");
+                System.out.print(skippedNumbers.get(index) + " ");
             }
         }
-        int[] newArray = new int[index];
-        for (int i = 0; i < newArray.length; i++) {
-            newArray[i] = skippedNumbers[i];
+        ArrayList<Integer> newArray = new ArrayList<>(index);
+        for (int i = 0; i < newArray.size(); i++) {
+            newArray.set(i, skippedNumbers.get(i));
         }
         return newArray;
     }
 
-    private void writeArrayToFile(int[] skippedNumbers, String resultFile) {
+    private void writeArrayToFile(ArrayList<Integer> skippedNumbers, String resultFile) {
         try (PrintWriter pw = new PrintWriter(resultFile)) {
-            for (int i = 0; i < skippedNumbers.length; i++) {
-                if (i == skippedNumbers.length - 1) {
-                    pw.print(skippedNumbers[i]);
+            for (int i = 0; i < skippedNumbers.size(); i++) {
+                if (i == skippedNumbers.size() - 1) {
+                    pw.print(skippedNumbers.get(i));
                     return;
                 }
-                pw.print(skippedNumbers[i] + "\n");
+                pw.print(skippedNumbers.get(i) + "\n");
             }
         } catch (IOException e) {
             throw new RuntimeException("Array write failed", e);
