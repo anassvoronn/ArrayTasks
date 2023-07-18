@@ -15,7 +15,6 @@ import static org.junit.Assert.assertEquals;
 
 public class Task32Test {
 
-    private static final String WORD_DELIMITER = " ";
     private static final String SOURCE_DATA_FILE = "src/main/resources/org/dz/solution/task32/InputFile";
     private static final String RESULT_FILE = "src/main/resources/org/dz/solution/task32/OutputFile";
 
@@ -90,43 +89,21 @@ public class Task32Test {
     }
 
     private void calculateSkippedNumbers() {
-        int countNumbers = findTheNumberOfNumbersInAFile(SOURCE_DATA_FILE);
-        ArrayList<Integer> numbersFromFile = writeNumbersToArray(countNumbers, SOURCE_DATA_FILE);
+        ArrayList<Integer> numbersFromFile = writeNumbersToArray(SOURCE_DATA_FILE);
         ArrayList<Integer> skippedNumbers = findTheMissingNumbers(numbersFromFile);
         writeArrayToFile(skippedNumbers, RESULT_FILE);
     }
 
-    private int findTheNumberOfNumbersInAFile(String sourceDataFile) {
-        int count = 0;
-        try (BufferedReader br = new BufferedReader(new FileReader(sourceDataFile))) {
-            String line = br.readLine();
-            if (line == null) {
-                return 0;
-            }
-            String[] words = line.split(WORD_DELIMITER);
-            for (int i = words.length - 1; i >= 0; i--) {
-                if (words.length > count) {
-                    count++;
-                }
-            }
-            System.out.println(count);
-        } catch (IOException e) {
-            throw new RuntimeException("Counting numbers failed", e);
-        }
-        return count;
-    }
-
-    private ArrayList<Integer> writeNumbersToArray(int countNumbers, String sourceDataFile) {
+    private ArrayList<Integer> writeNumbersToArray(String sourceDataFile) {
         ArrayList<Integer> array = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(sourceDataFile))) {
             String line = br.readLine();
-            if (line == null) {
-                return new ArrayList<>(0);
+            if (line == null || line.isEmpty()) {
+                return array;
             }
             String[] elements = line.split(" ");
-            for (int i = 0; i < elements.length; i++) {
-                array.set(i, Integer.parseInt(elements[i]));
-                System.out.print(array.get(i) + " ");
+            for (String element : elements) {
+                array.add(Integer.parseInt(element));
             }
         } catch (IOException e) {
             throw new RuntimeException("Array creation failed", e);
@@ -136,10 +113,9 @@ public class Task32Test {
 
     private ArrayList<Integer> findTheMissingNumbers(ArrayList<Integer> numbersFromFile) {
         ArrayList<Integer> skippedNumbers = new ArrayList<>();
-        int index = 0;
-        if (numbersFromFile == null) {
-            for (int i = 0; i < skippedNumbers.size(); i++) {
-                skippedNumbers.set(i, i + 1);
+        if (numbersFromFile.size() == 0) {
+            for (int i = 1; i <= 20; i++) {
+                skippedNumbers.add(i);
             }
             return skippedNumbers;
         }
@@ -153,16 +129,10 @@ public class Task32Test {
                 }
             }
             if (!foundNumber) {
-                skippedNumbers.set(index, i);
-                index++;
-                System.out.print(skippedNumbers.get(index) + " ");
+                skippedNumbers.add(i);
             }
         }
-        ArrayList<Integer> newArray = new ArrayList<>(index);
-        for (int i = 0; i < newArray.size(); i++) {
-            newArray.set(i, skippedNumbers.get(i));
-        }
-        return newArray;
+        return skippedNumbers;
     }
 
     private void writeArrayToFile(ArrayList<Integer> skippedNumbers, String resultFile) {
