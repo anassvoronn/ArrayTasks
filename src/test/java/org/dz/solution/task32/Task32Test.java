@@ -88,6 +88,38 @@ public class Task32Test {
         assertEquals("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n17\n18\n19", actualResult);
     }
 
+    @Test
+    public void case8() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1 3 4 12\n13 14 16 19\n20");
+        calculateSkippedNumbers();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("2\n5\n6\n7\n8\n9\n10\n11\n15\n17\n18", actualResult);
+    }
+
+    @Test
+    public void case9() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1 2 3 4\n5 6 7 8 9\n10 11 12 13 14\n15\n16 17 18\n19 20");
+        calculateSkippedNumbers();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("", actualResult);
+    }
+
+    @Test
+    public void case10() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1\n3\n4\n6\n13\n14");
+        calculateSkippedNumbers();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("2\n5\n7\n8\n9\n10\n11\n12\n15\n16\n17\n18\n19\n20", actualResult);
+    }
+
+    @Test
+    public void case11() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1, 2 3 4\n5 6-7 8 9\n10 11 12 13. 14\n15\n16 ,17, 18\n19 20,");
+        calculateSkippedNumbers();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("", actualResult);
+    }
+
     private void calculateSkippedNumbers() {
         ArrayList<Integer> numbersFromFile = writeNumbersToArray(SOURCE_DATA_FILE);
         ArrayList<Integer> skippedNumbers = findTheMissingNumbers(numbersFromFile);
