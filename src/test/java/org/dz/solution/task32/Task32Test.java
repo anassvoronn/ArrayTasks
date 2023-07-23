@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,6 +18,7 @@ public class Task32Test {
 
     private static final String SOURCE_DATA_FILE = "src/main/resources/org/dz/solution/task32/InputFile";
     private static final String RESULT_FILE = "src/main/resources/org/dz/solution/task32/OutputFile";
+    private static final String[] BAD_SYMBOLS = new String[]{",", "-", "\\."};
 
     @Before
     public void setUp() throws Exception {
@@ -114,37 +116,39 @@ public class Task32Test {
 
     @Test
     public void case11() throws IOException {
-        Files.writeString(Path.of(SOURCE_DATA_FILE), "1, 2 3 4\n5 6-7 8 9\n10 11 12 13. 14\n15\n16 ,17, 18\n19 20,");
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1,. 2 3 4\n5 6- 7 8 9\n10 11 12 13. 14\n15\n16 ,17, 18\n19 20,");
         calculateSkippedNumbers();
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("", actualResult);
     }
 
     private void calculateSkippedNumbers() {
-        ArrayList<Integer> numbersFromFile = writeNumbersToArray(SOURCE_DATA_FILE);
-        ArrayList<Integer> skippedNumbers = findTheMissingNumbers(numbersFromFile);
+        List<Integer> numbersFromFile = writeNumbersToArray(SOURCE_DATA_FILE);
+        List<Integer> skippedNumbers = findTheMissingNumbers(numbersFromFile);
         writeArrayToFile(skippedNumbers, RESULT_FILE);
     }
 
-    private ArrayList<Integer> writeNumbersToArray(String sourceDataFile) {
-        ArrayList<Integer> array = new ArrayList<>();
+    private List<Integer> writeNumbersToArray(String sourceDataFile) {
+        List<Integer> array = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(sourceDataFile))) {
-            String line = br.readLine();
-            if (line == null || line.isEmpty()) {
-                return array;
-            }
-            String[] elements = line.split(" ");
-            for (String element : elements) {
-                array.add(Integer.parseInt(element));
+            String line;
+            while ((line = br.readLine()) != null) {
+                for (int j = 0; j < BAD_SYMBOLS.length; j++) {
+                    line = line.replaceAll(BAD_SYMBOLS[j], "");
+                }
+                String[] words = line.split(" ");
+                for (String element : words) {
+                    array.add(Integer.parseInt(element));
+                }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Array creation failed", e);
+            throw new RuntimeException("Array not cleared", e);
         }
         return array;
     }
 
-    private ArrayList<Integer> findTheMissingNumbers(ArrayList<Integer> numbersFromFile) {
-        ArrayList<Integer> skippedNumbers = new ArrayList<>();
+    private List<Integer> findTheMissingNumbers(List<Integer> numbersFromFile) {
+        List<Integer> skippedNumbers = new ArrayList<>();
         if (numbersFromFile.size() == 0) {
             for (int i = 1; i <= 20; i++) {
                 skippedNumbers.add(i);
@@ -167,7 +171,7 @@ public class Task32Test {
         return skippedNumbers;
     }
 
-    private void writeArrayToFile(ArrayList<Integer> skippedNumbers, String resultFile) {
+    private void writeArrayToFile(List<Integer> skippedNumbers, String resultFile) {
         try (PrintWriter pw = new PrintWriter(resultFile)) {
             for (int i = 0; i < skippedNumbers.size(); i++) {
                 if (i == skippedNumbers.size() - 1) {
