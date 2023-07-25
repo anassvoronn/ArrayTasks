@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,7 +19,7 @@ public class Task32Test {
 
     private static final String SOURCE_DATA_FILE = "src/main/resources/org/dz/solution/task32/InputFile";
     private static final String RESULT_FILE = "src/main/resources/org/dz/solution/task32/OutputFile";
-    private static final String[] BAD_SYMBOLS = new String[]{",", "-", "\\."};
+    private static final String[] BAD_SYMBOLS = new String[]{",", "-", "\\.", ";"};
 
     @Before
     public void setUp() throws Exception {
@@ -122,6 +123,22 @@ public class Task32Test {
         assertEquals("", actualResult);
     }
 
+    @Test
+    public void case12() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1.-\n3\n4\n6\n;13\n14");
+        calculateSkippedNumbers();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("2\n5\n7\n8\n9\n10\n11\n12\n15\n16\n17\n18\n19\n20", actualResult);
+    }
+
+    @Test
+    public void case13() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "1,.2 3 4\n5 6-7 8 9\n10 11 12 13. 14\n15\n16 ,17, 18\n19 20,");
+        calculateSkippedNumbers();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("", actualResult);
+    }
+
     private void calculateSkippedNumbers() {
         List<Integer> numbersFromFile = writeNumbersToArray(SOURCE_DATA_FILE);
         List<Integer> skippedNumbers = findTheMissingNumbers(numbersFromFile);
@@ -134,11 +151,16 @@ public class Task32Test {
             String line;
             while ((line = br.readLine()) != null) {
                 for (int j = 0; j < BAD_SYMBOLS.length; j++) {
-                    line = line.replaceAll(BAD_SYMBOLS[j], "");
+                    line = line.replaceAll(BAD_SYMBOLS[j], " ");
                 }
                 String[] words = line.split(" ");
-                for (String element : words) {
-                    array.add(Integer.parseInt(element));
+                for (int i = 0; i < words.length; i++) {
+                    if (Objects.equals(words[i], "")) {
+                        continue;
+                    } else if (Objects.equals(words[i], " ")) {
+                        continue;
+                    }
+                    array.add(Integer.parseInt(words[i]));
                 }
             }
         } catch (IOException e) {
