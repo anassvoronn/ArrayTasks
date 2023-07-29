@@ -20,6 +20,7 @@ public class Task32Test {
     private static final String SOURCE_DATA_FILE = "src/main/resources/org/dz/solution/task32/InputFile";
     private static final String RESULT_FILE = "src/main/resources/org/dz/solution/task32/OutputFile";
     private static final String[] BAD_SYMBOLS = new String[]{",", "-", "\\.", ";"};
+    public static final String WORD_DELIMITER = " ";
 
     @Before
     public void setUp() throws Exception {
@@ -150,17 +151,17 @@ public class Task32Test {
         try (BufferedReader br = new BufferedReader(new FileReader(sourceDataFile))) {
             String line;
             while ((line = br.readLine()) != null) {
-                for (int j = 0; j < BAD_SYMBOLS.length; j++) {
-                    line = line.replaceAll(BAD_SYMBOLS[j], " ");
+                for (String badSymbol : BAD_SYMBOLS) {
+                    line = line.replaceAll(badSymbol, WORD_DELIMITER);
                 }
-                String[] words = line.split(" ");
-                for (int i = 0; i < words.length; i++) {
-                    if (Objects.equals(words[i], "")) {
+                String[] words = line.split(WORD_DELIMITER);
+                for (String word : words) {
+                    if (Objects.equals(word, "")) {
                         continue;
-                    } else if (Objects.equals(words[i], " ")) {
+                    } else if (Objects.equals(word, WORD_DELIMITER)) {
                         continue;
                     }
-                    array.add(Integer.parseInt(words[i]));
+                    array.add(Integer.parseInt(word));
                 }
             }
         } catch (IOException e) {
@@ -177,17 +178,15 @@ public class Task32Test {
             }
             return skippedNumbers;
         }
-        int min = 1;
-        for (int i = min; i <= 20; i++) {
-            boolean foundNumber = false;
-            for (int j = 0; j < numbersFromFile.size(); j++) {
-                if (numbersFromFile.get(j) == i) {
-                    foundNumber = true;
-                    break;
+        int index = 1;
+        for (Integer numberFromFile : numbersFromFile) {
+            if (index < numberFromFile) {
+                while (index < numberFromFile) {
+                    skippedNumbers.add(index);
+                    index++;
                 }
-            }
-            if (!foundNumber) {
-                skippedNumbers.add(i);
+            } else if (index == numberFromFile) {
+                index++;
             }
         }
         return skippedNumbers;
