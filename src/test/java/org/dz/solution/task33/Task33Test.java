@@ -14,16 +14,15 @@ public class Task33Test {
 
     @Test
     public void test() {
-        int a = 10;
-        System.out.println(a++);
-        System.out.println(a);
     }
 
     private void calculateSkippedNumbers() {
-        List<String> textFromFile = writeNumbersToArray(SOURCE_DATA_FILE);
+        List<String> textFromFile = ReadingAFile(SOURCE_DATA_FILE);
+        wordCount(textFromFile);
+        writeWordCountToFile(RESULT_FILE);
     }
 
-    private List<String> writeNumbersToArray(String sourceDataFile) {
+    private List<String> ReadingAFile(String sourceDataFile) {
         List<String> array = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(sourceDataFile))) {
             String line;
@@ -41,9 +40,8 @@ public class Task33Test {
         return array;
     }
 
-    private void wordCount() {
+    private void wordCount(List<String> array) {
         Map<String, Integer> wordCount = new HashMap<>();
-        List<String> array = new ArrayList<>();
         for (String word : array) {
             if (wordCount.containsKey(word)) {
                 int count = wordCount.get(word);
