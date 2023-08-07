@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 
 public class Task33Test {
-    private static final String SOURCE_DATA_FILE = "src/main/resources/org/dz/solution/task33/MainFile";
+    private static final String SOURCE_DATA_FILE = "src/main/resources/org/dz/solution/task33/InputFile";
     private static final String RESULT_FILE = "src/main/resources/org/dz/solution/task33/OutputFile";
     private static final String[] SYMBOLS = new String[]{",", "-", "\\.", ";", "(", ")", ":", "\"", "«", "»", "„", "“"};
     public static final String WORD_DELIMITER = " ";
@@ -56,9 +56,9 @@ public class Task33Test {
         return array;
     }
 
-    private void repCounting(List<String> array) {
+    private void repCounting(List<String> wordList) {
         Map<String, Integer> arrayOfWords = new HashMap<>();
-        for (String word : array) {
+        for (String word : wordList) {
             if (arrayOfWords.containsKey(word)) {
                 int count = arrayOfWords.get(word);
                 arrayOfWords.put(word, count + 1);
@@ -71,11 +71,11 @@ public class Task33Test {
     public static void writeWordCountToFile(String resultFile) {
         Map<String, Integer> wordCount = new HashMap<>();
         try (PrintWriter writer = new PrintWriter(new FileWriter(resultFile))) {
-            for (Map.Entry<String, Integer> entry : wordCount.entrySet()) {
+            for (var entry : wordCount.entrySet()) {
                 writer.println(entry.getKey() + " " + entry.getValue());
             }
         } catch (IOException e) {
-            System.out.println("Data not written to file");
+            System.out.println("Writing to the file failed");
             e.printStackTrace();
         }
     }
