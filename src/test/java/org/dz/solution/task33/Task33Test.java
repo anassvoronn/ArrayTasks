@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 
 public class Task33Test {
+    private static final String BIG_FILE_WITH_TEXT = "src/test/resources/org/dz/solution/task33/BigFileWithText";
     private static final String SOURCE_DATA_FILE = "src/main/resources/org/dz/solution/task33/InputFile";
     private static final String RESULT_FILE = "src/main/resources/org/dz/solution/task33/OutputFile";
     private static final String[] SYMBOLS = new String[]{",", "-", "\\.", ";", "\\(", "\\)", ":", "\"", "«", "»", "„", "“"};
@@ -70,6 +71,30 @@ public class Task33Test {
         writeOutTheWordsAndTheNumberOfTheirRepetitions();
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("вода 1\nводоем 1\nводохранилище 1\nводяной 1", actualResult);
+    }
+
+    @Test
+    public void case8() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "кот, собака. Котик\n \n\nкот( Кот \nжираф ;\nКотик- кот");
+        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("жираф 1\nкот 4\nкотик 2\nсобака 1", actualResult);
+    }
+
+    @Test
+    public void case9() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "\n\nвода „водоем\n водяной ВоДа« \n\nводохранилище\n\nВОДОХРАНИЛИЩЕ");
+        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("вода 2\nводоем 1\nводохранилище 2\nводяной 1", actualResult);
+    }
+    
+    @Test
+    public void caseWithBigFile() throws IOException {
+        String text = Files.readString(Path.of(BIG_FILE_WITH_TEXT));
+        Files.writeString(Path.of(SOURCE_DATA_FILE), text);
+        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
     }
 
     private void writeOutTheWordsAndTheNumberOfTheirRepetitions() {
