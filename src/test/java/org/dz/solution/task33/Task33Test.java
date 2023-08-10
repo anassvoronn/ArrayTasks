@@ -32,6 +32,46 @@ public class Task33Test {
         assertEquals("вода 1\nводоем 1\nводохранилище 1\nводяной 1", actualResult);
     }
 
+    @Test
+    public void case3() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "");
+        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("", actualResult);
+    }
+
+    @Test
+    public void case4() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), " ");
+        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("", actualResult);
+    }
+
+    @Test
+    public void case5() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), " 4");
+        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("4 1", actualResult);
+    }
+
+    @Test
+    public void case6() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "кот, собака.\n \n\nкот( кот \nжираф ;\nкотик- кот");
+        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("жираф 1\nкот 4\nкотик 1\nсобака 1", actualResult);
+    }
+
+    @Test
+    public void case7() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "\n\nвода „водоем\n водяной « \n\nводохранилище\n\n");
+        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("вода 1\nводоем 1\nводохранилище 1\nводяной 1", actualResult);
+    }
+
     private void writeOutTheWordsAndTheNumberOfTheirRepetitions() {
         List<String> wordList = readWordsFromFile(SOURCE_DATA_FILE);
         Map<String, Integer> wordToCount = countWords(wordList);
