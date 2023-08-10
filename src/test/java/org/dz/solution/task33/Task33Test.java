@@ -21,7 +21,7 @@ public class Task33Test {
         Files.writeString(Path.of(SOURCE_DATA_FILE), "кот, собака. кот( кот жираф ;котик- кот");
         writeOutTheWordsAndTheNumberOfTheirRepetitions();
         String actualResult = Files.readString(Path.of(RESULT_FILE));
-        assertEquals("жираф 1\r\nкот 4\r\nкотик 1\r\nсобака 1", actualResult);
+        assertEquals("жираф 1\nкот 4\nкотик 1\nсобака 1", actualResult);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class Task33Test {
         Files.writeString(Path.of(SOURCE_DATA_FILE), "вода „водоем водяной « водохранилище");
         writeOutTheWordsAndTheNumberOfTheirRepetitions();
         String actualResult = Files.readString(Path.of(RESULT_FILE));
-        assertEquals("вода 1\r\nводоем 1\r\nводохранилище 1\r\nводяной 1", actualResult);
+        assertEquals("вода 1\nводоем 1\nводохранилище 1\nводяной 1", actualResult);
     }
 
     private void writeOutTheWordsAndTheNumberOfTheirRepetitions() {
@@ -92,7 +92,7 @@ public class Task33Test {
                     writer.print(entry.getKey() + " " + entry.getValue());
                     return;
                 }
-                writer.println(entry.getKey() + " " + entry.getValue());
+                writer.print(entry.getKey() + " " + entry.getValue() + "\n");
                 count++;
             }
         } catch (IOException e) {
