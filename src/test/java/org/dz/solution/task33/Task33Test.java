@@ -88,7 +88,7 @@ public class Task33Test {
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("вода 2\nводоем 1\nводохранилище 2\nводяной 1", actualResult);
     }
-    
+
     @Test
     public void caseWithBigFile() throws IOException {
         String text = Files.readString(Path.of(BIG_FILE_WITH_TEXT));
@@ -118,6 +118,7 @@ public class Task33Test {
                 line = clearLine(line);
                 String[] lineWords = line.split(WORD_DELIMITER);
                 for (String word : lineWords) {
+                    word = word.toLowerCase();
                     if (Objects.equals(word, "")) {
                         continue;
                     } else if (Objects.equals(word, WORD_DELIMITER)) {
