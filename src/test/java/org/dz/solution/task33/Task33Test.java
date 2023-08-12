@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+import static java.util.Map.Entry.comparingByKey;
 import static org.junit.Assert.assertEquals;
 
 
@@ -20,7 +21,7 @@ public class Task33Test {
     @Test
     public void case1() throws IOException {
         Files.writeString(Path.of(SOURCE_DATA_FILE), "кот, собака. кот( кот жираф ;котик- кот");
-        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        writeOutTheWordsAndTheNumberOfTheirRepetitions(comparingByKey());
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("жираф 1\nкот 4\nкотик 1\nсобака 1", actualResult);
     }
@@ -28,7 +29,7 @@ public class Task33Test {
     @Test
     public void case2() throws IOException {
         Files.writeString(Path.of(SOURCE_DATA_FILE), "вода „водоем водяной « водохранилище");
-        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        writeOutTheWordsAndTheNumberOfTheirRepetitions(comparingByKey());
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("вода 1\nводоем 1\nводохранилище 1\nводяной 1", actualResult);
     }
@@ -36,7 +37,7 @@ public class Task33Test {
     @Test
     public void case3() throws IOException {
         Files.writeString(Path.of(SOURCE_DATA_FILE), "");
-        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        writeOutTheWordsAndTheNumberOfTheirRepetitions(comparingByKey());
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("", actualResult);
     }
@@ -44,7 +45,7 @@ public class Task33Test {
     @Test
     public void case4() throws IOException {
         Files.writeString(Path.of(SOURCE_DATA_FILE), " ");
-        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        writeOutTheWordsAndTheNumberOfTheirRepetitions(comparingByKey());
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("", actualResult);
     }
@@ -52,7 +53,7 @@ public class Task33Test {
     @Test
     public void case5() throws IOException {
         Files.writeString(Path.of(SOURCE_DATA_FILE), " 4");
-        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        writeOutTheWordsAndTheNumberOfTheirRepetitions(comparingByKey());
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("4 1", actualResult);
     }
@@ -60,7 +61,7 @@ public class Task33Test {
     @Test
     public void case6() throws IOException {
         Files.writeString(Path.of(SOURCE_DATA_FILE), "кот, собака.\n \n\nкот( кот \nжираф ;\nкотик- кот");
-        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        writeOutTheWordsAndTheNumberOfTheirRepetitions(comparingByKey());
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("жираф 1\nкот 4\nкотик 1\nсобака 1", actualResult);
     }
@@ -68,7 +69,7 @@ public class Task33Test {
     @Test
     public void case7() throws IOException {
         Files.writeString(Path.of(SOURCE_DATA_FILE), "\n\nвода „водоем\n водяной « \n\nводохранилище\n\n");
-        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        writeOutTheWordsAndTheNumberOfTheirRepetitions(comparingByKey());
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("вода 1\nводоем 1\nводохранилище 1\nводяной 1", actualResult);
     }
@@ -76,7 +77,7 @@ public class Task33Test {
     @Test
     public void case8() throws IOException {
         Files.writeString(Path.of(SOURCE_DATA_FILE), "кот, собака. Котик\n \n\nкот( Кот \nжираф ;\nКотик- кот");
-        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        writeOutTheWordsAndTheNumberOfTheirRepetitions(comparingByKey());
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("жираф 1\nкот 4\nкотик 2\nсобака 1", actualResult);
     }
@@ -84,7 +85,7 @@ public class Task33Test {
     @Test
     public void case9() throws IOException {
         Files.writeString(Path.of(SOURCE_DATA_FILE), "\n\nвода „водоем\n водяной ВоДа« \n\nводохранилище\n\nВОДОХРАНИЛИЩЕ");
-        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        writeOutTheWordsAndTheNumberOfTheirRepetitions(comparingByKey());
         String actualResult = Files.readString(Path.of(RESULT_FILE));
         assertEquals("вода 2\nводоем 1\nводохранилище 2\nводяной 1", actualResult);
     }
@@ -93,14 +94,32 @@ public class Task33Test {
     public void caseWithBigFile() throws IOException {
         String text = Files.readString(Path.of(BIG_FILE_WITH_TEXT));
         Files.writeString(Path.of(SOURCE_DATA_FILE), text);
-        writeOutTheWordsAndTheNumberOfTheirRepetitions();
+        writeOutTheWordsAndTheNumberOfTheirRepetitions(comparingByKey());
         String actualResult = Files.readString(Path.of(RESULT_FILE));
     }
 
-    private void writeOutTheWordsAndTheNumberOfTheirRepetitions() {
+    @Test
+    public void case10() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "кот, собака. кот( кот жираф ;котик- кот");
+        writeOutTheWordsAndTheNumberOfTheirRepetitions((o1, o2) -> 0);
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("собака 1\nкотик 1\nкот 4\nжираф 1", actualResult);
+    }
+
+    @Test
+    public void case11() throws IOException {
+        Files.writeString(Path.of(SOURCE_DATA_FILE), "водяной вода водохранилище „водоем водохранилище водяной « водохранилище");
+        writeOutTheWordsAndTheNumberOfTheirRepetitions((o1, o2) -> {
+            return 0;
+        });
+        String actualResult = Files.readString(Path.of(RESULT_FILE));
+        assertEquals("водохранилище 3\nводяной 2\nвода 1\nводоем 1", actualResult);
+    }
+
+    private void writeOutTheWordsAndTheNumberOfTheirRepetitions(Comparator<Map.Entry<String, Integer>> comparator) {
         List<String> wordList = readWordsFromFile(SOURCE_DATA_FILE);
         Map<String, Integer> wordToCount = countWords(wordList);
-        writeWordCountToFile(RESULT_FILE, wordToCount);
+        writeWordCountToFile(RESULT_FILE, wordToCount, comparator);
     }
 
     private String clearLine(String line) {
@@ -147,11 +166,11 @@ public class Task33Test {
         return wordsToCounter;
     }
 
-    public static void writeWordCountToFile(String resultFile, Map<String, Integer> arrayOfWords) {
+    public void writeWordCountToFile(String resultFile, Map<String, Integer> arrayOfWords, Comparator<Map.Entry<String, Integer>> comparator) {
         int count = 1;
         Set<Map.Entry<String, Integer>> entrySet = arrayOfWords.entrySet();
         List<Map.Entry<String, Integer>> entryList = new ArrayList<>(entrySet);
-        entryList.sort(Map.Entry.comparingByKey());
+        entryList.sort(comparator);
         try (PrintWriter writer = new PrintWriter(new FileWriter(resultFile))) {
             for (var entry : entryList) {
                 if (count == arrayOfWords.size()) {
