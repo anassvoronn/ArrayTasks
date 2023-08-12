@@ -12,8 +12,8 @@ import static org.junit.Assert.assertEquals;
 
 public class Task33Test {
     private static final String BIG_FILE_WITH_TEXT = "src/test/resources/org/dz/solution/task33/BigFileWithText";
-    private static final String SOURCE_DATA_FILE = "src/main/resources/org/dz/solution/task33/InputFile";
-    private static final String RESULT_FILE = "src/main/resources/org/dz/solution/task33/OutputFile";
+    private static final String SOURCE_DATA_FILE = "src/test/resources/org/dz/solution/task33/InputFile";
+    private static final String RESULT_FILE = "src/test/resources/org/dz/solution/task33/OutputFile";
     private static final String[] SYMBOLS = new String[]{",", "-", "\\.", ";", "\\(", "\\)", ":", "\"", "«", "»", "„", "“"};
     public static final String WORD_DELIMITER = " ";
 
